@@ -1,0 +1,6 @@
+export { default as HeroSection } from './HeroSection'
+export { default as ServicesSection } from './ServicesSection'
+export { default as ProjectsShowcase } from './ProjectsShowcase'
+export { default as AboutPreview } from './AboutPreview'
+export { default as StatsSection } from './StatsSection'
+export { default as ContactCTA } from './ContactCTA'
