@@ -32,9 +32,13 @@ const CountUp = ({
 
   useEffect(() => {
     if (!isInView) return
+    let frameId: number | null = null
+
     if (prefersReducedMotion) {
-      setDisplayValue(to)
-      return
+      frameId = requestAnimationFrame(() => setDisplayValue(to))
+      return () => {
+        if (frameId) cancelAnimationFrame(frameId)
+      }
     }
 
     const startTime = performance.now()
@@ -49,11 +53,14 @@ const CountUp = ({
       setDisplayValue(current)
 
       if (progress < 1) {
-        requestAnimationFrame(tick)
+        frameId = requestAnimationFrame(tick)
       }
     }
 
-    requestAnimationFrame(tick)
+    frameId = requestAnimationFrame(tick)
+    return () => {
+      if (frameId) cancelAnimationFrame(frameId)
+    }
   }, [isInView, from, to, duration, prefersReducedMotion])
 
   const formatted = displayValue.toLocaleString(locale)

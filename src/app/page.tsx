@@ -6,6 +6,7 @@ import {
   ServicesSection,
   ProjectsShowcase,
   AboutPreview,
+  ContactCTA,
 } from '@/sections/home'
 
 export const metadata: Metadata = createMetadata({
@@ -22,6 +23,7 @@ const HomePage = () => {
       <ServicesSection />
       <ProjectsShowcase />
       <AboutPreview />
+      <ContactCTA />
     </>
   )
 }

@@ -10,7 +10,7 @@ interface ErrorPageProps {
   reset: () => void
 }
 
-const ErrorPage = ({ error, reset }: ErrorPageProps) => {
+const ErrorPage = ({ reset }: ErrorPageProps) => {
   return (
     <div className="min-h-[60vh] flex items-center justify-center">
       <Container className="flex flex-col items-center text-center py-16">

@@ -28,17 +28,17 @@ const SectionTitle = ({
       )}
     >
       {overline && (
-        <p
-          className={cn(
-            'mb-3 text-xs font-bold uppercase tracking-widest text-accent md:text-sm',
-          )}
-        >
-          {overline}
-        </p>
+        <div className={cn('mb-4 flex items-center gap-3', isCenter && 'justify-center')}>
+          <div className="h-[1px] w-8 bg-accent" />
+          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent md:text-xs">
+            {overline}
+          </p>
+          {isCenter && <div className="h-[1px] w-8 bg-accent" />}
+        </div>
       )}
       <h2
         className={cn(
-          'text-2xl font-bold tracking-tight md:text-4xl',
+          'text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl',
           dark ? 'text-primary-foreground' : 'text-foreground',
         )}
       >

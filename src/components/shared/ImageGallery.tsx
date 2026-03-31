@@ -79,7 +79,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         onOpenChange={(open) => !open && setSelectedIndex(null)}
       >
         <DialogContent
-          className="max-w-4xl border-none bg-black/95 p-0 sm:max-w-4xl"
+          className="h-[92vh] w-[96vw] max-w-none border border-white/10 bg-black/95 p-0 sm:max-w-none"
           onKeyDown={handleKeyDown}
         >
           <DialogTitle className="sr-only">
@@ -89,14 +89,14 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
           </DialogTitle>
 
           {/* Image display */}
-          <div className="relative aspect-video">
+          <div className="relative h-[calc(92vh-5.5rem)]">
             {selectedIndex !== null && (
               <Image
                 src={images[selectedIndex].url}
                 alt={images[selectedIndex].alt || `Gorsel ${selectedIndex + 1}`}
                 fill
                 className="object-contain"
-                sizes="(max-width: 1024px) 100vw, 896px"
+                sizes="95vw"
                 priority
               />
             )}
@@ -108,7 +108,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   variant="ghost"
                   size="icon"
                   onClick={handlePrev}
-                  className="absolute left-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 text-white hover:bg-black/70 hover:text-white"
+                  className="absolute left-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-black/55 text-white hover:bg-black/75 hover:text-white"
                   aria-label="Onceki gorsel"
                 >
                   <ChevronLeft className="size-6" />
@@ -117,7 +117,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   variant="ghost"
                   size="icon"
                   onClick={handleNext}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full bg-black/50 text-white hover:bg-black/70 hover:text-white"
+                  className="absolute right-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-black/55 text-white hover:bg-black/75 hover:text-white"
                   aria-label="Sonraki gorsel"
                 >
                   <ChevronRight className="size-6" />
@@ -128,7 +128,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
 
           {/* Image counter */}
           {selectedIndex !== null && (
-            <div className="pb-4 text-center text-sm text-white/60">
+            <div className="flex h-14 items-center justify-center px-6 text-center text-sm text-white/70">
               {selectedIndex + 1} / {images.length}
               {images[selectedIndex]?.alt && (
                 <span className="ml-2 text-white/40">

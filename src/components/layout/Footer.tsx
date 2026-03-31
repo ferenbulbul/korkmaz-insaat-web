@@ -35,7 +35,10 @@ const Footer = () => {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-[#1C1917] text-stone-300">
+    <footer className="noise-overlay relative bg-[#1C1917] text-stone-300">
+      {/* Top gold line */}
+      <div className="h-[1px] w-full bg-gradient-to-r from-transparent via-accent to-transparent" />
+
       {/* Main footer content */}
       <Container className="py-12 md:py-16">
         <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
@@ -56,8 +59,8 @@ const Footer = () => {
                   aria-label={label}
                   className={cn(
                     'flex size-10 items-center justify-center rounded-md',
-                    'bg-white/8 text-stone-400 transition-colors',
-                    'hover:bg-accent hover:text-white'
+                    'bg-white/8 text-stone-400 transition-all duration-300',
+                    'hover:bg-accent hover:text-white hover:shadow-lg hover:shadow-accent/20'
                   )}
                 >
                   <Icon className="size-5" />
@@ -72,6 +75,7 @@ const Footer = () => {
               <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
                 {section.title}
               </h3>
+              <div className="mt-2 h-[1px] w-8 bg-accent/40" />
               <ul className="mt-4 space-y-3">
                 {section.links.map((link) => (
                   <li key={link.href}>
@@ -92,6 +96,7 @@ const Footer = () => {
             <h3 className="text-sm font-semibold uppercase tracking-wider text-white">
               Iletisim
             </h3>
+            <div className="mt-2 h-[1px] w-8 bg-accent/40" />
             <ul className="mt-4 space-y-4">
               <li>
                 <a
@@ -134,18 +139,9 @@ const Footer = () => {
             &copy; {currentYear} {siteConfig.name}. Tum haklari saklidir.
           </p>
           <div className="flex items-center gap-4">
-            <Link
-              href="/gizlilik-politikasi"
-              className="text-xs text-stone-500 transition-colors hover:text-stone-300"
-            >
-              Gizlilik Politikasi
-            </Link>
-            <Link
-              href="/kvkk"
-              className="text-xs text-stone-500 transition-colors hover:text-stone-300"
-            >
-              KVKK
-            </Link>
+            <span className="text-xs text-stone-500">
+              Kalite ve guvenin adresi
+            </span>
           </div>
         </Container>
       </div>

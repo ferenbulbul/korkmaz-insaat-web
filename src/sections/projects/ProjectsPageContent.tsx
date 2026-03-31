@@ -1,9 +1,7 @@
 'use client'
 
-import { useState, useMemo } from 'react'
-import ProjectFilters from './ProjectFilters'
-import ProjectsGrid from './ProjectsGrid'
 import { ScrollReveal } from '@/components/motion'
+import ProjectsGrid from './ProjectsGrid'
 import type { Project } from '@/types/project'
 
 interface ProjectsPageContentProps {
@@ -11,22 +9,17 @@ interface ProjectsPageContentProps {
 }
 
 const ProjectsPageContent = ({ projects }: ProjectsPageContentProps) => {
-  const [activeCategory, setActiveCategory] = useState('all')
-
-  const filteredProjects = useMemo(() => {
-    if (activeCategory === 'all') return projects
-    return projects.filter((project) => project.category === activeCategory)
-  }, [projects, activeCategory])
-
   return (
     <div>
-      <ScrollReveal direction="down" delay={0.1} distance={20}>
-        <ProjectFilters
-          activeCategory={activeCategory}
-          onFilterChange={setActiveCategory}
-        />
+      <ScrollReveal direction="up" delay={0.15}>
+        <p className="mb-6 text-sm text-muted-foreground md:mb-8">
+          <span className="font-semibold text-foreground">
+            {projects.length}
+          </span>{' '}
+          proje listeleniyor.
+        </p>
       </ScrollReveal>
-      <ProjectsGrid projects={filteredProjects} />
+      <ProjectsGrid projects={projects} />
     </div>
   )
 }

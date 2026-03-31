@@ -22,7 +22,7 @@ const SectionWrapper = ({
   return (
     <section
       id={id}
-      className={cn('py-16 md:py-24', bgColorMap[bgColor], className)}
+      className={cn('py-20 md:py-24 lg:py-28', bgColorMap[bgColor], className)}
     >
       {children}
     </section>

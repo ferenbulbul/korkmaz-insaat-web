@@ -21,24 +21,29 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
   return (
     <div
       className={cn(
-        'rounded-xl border bg-card p-6 transition-all duration-300 md:p-8',
-        'hover:shadow-lg hover:border-accent/30',
+        'group relative h-full overflow-hidden rounded-xl border bg-card p-6 transition-all duration-500 md:p-8',
+        'hover:-translate-y-1 hover:shadow-xl hover:border-accent/20',
+        'before:absolute before:left-0 before:top-0 before:h-full before:w-[2px] before:bg-transparent before:transition-all before:duration-500',
+        'hover:before:bg-accent',
       )}
     >
       {/* Icon */}
-      <div className="mb-5 flex size-14 items-center justify-center rounded-xl bg-accent/10">
+      <div className="relative mb-5 flex size-14 items-center justify-center rounded-xl bg-accent/8 transition-colors duration-500 group-hover:bg-accent/15">
         <IconComponent className="size-7 text-accent" />
       </div>
 
       {/* Title */}
-      <h3 className="mb-3 text-xl font-bold tracking-tight text-foreground">
+      <h3 className="relative mb-3 text-xl font-bold tracking-tight text-foreground">
         {title}
       </h3>
 
       {/* Description */}
-      <p className="text-sm leading-relaxed text-muted-foreground md:text-base">
+      <p className="relative text-sm leading-relaxed text-muted-foreground md:text-base">
         {description}
       </p>
+
+      {/* Bottom gold line on hover */}
+      <div className="absolute bottom-0 left-0 h-[1px] w-0 bg-gradient-to-r from-accent to-accent/0 transition-all duration-700 group-hover:w-full" />
     </div>
   )
 }

@@ -11,14 +11,15 @@ const ContactFormSection = () => {
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2">
           {/* Left column: Form */}
           <ScrollReveal direction="left" duration={0.7}>
-            <div>
+            <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-sm md:p-8">
               <SectionTitle
                 overline="BIZE YAZIN"
                 title="Iletisim Formu"
                 alignment="left"
+                className="mb-6 md:mb-8"
               />
 
-              <p className="-mt-6 mb-8 text-muted-foreground md:-mt-10">
+              <p className="mb-8 text-muted-foreground">
                 Projeleriniz hakkinda bilgi almak veya teklif istemek icin formu
                 doldurun. En kisa surede size donus yapacagiz.
               </p>
@@ -32,10 +33,10 @@ const ContactFormSection = () => {
             <div className="flex flex-col gap-6">
               <MapPlaceholder
                 address={siteConfig.links.address}
-                className="min-h-[400px]"
+                className="min-h-[400px] rounded-2xl border border-border/70 shadow-sm"
               />
 
-              <div className="flex items-start gap-3 rounded-lg border bg-card p-4">
+              <div className="flex items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-sm">
                 <div className="flex size-9 shrink-0 items-center justify-center rounded-full bg-accent/10">
                   <Clock className="size-4 text-accent" />
                 </div>

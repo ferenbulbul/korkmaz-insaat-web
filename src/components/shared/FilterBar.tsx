@@ -16,8 +16,7 @@ const FilterBar = ({ categories, active, onChange, className }: FilterBarProps) 
   return (
     <div
       className={cn(
-        'flex gap-2 overflow-x-auto pb-2 scrollbar-none',
-        '-mx-1 px-1',
+        'flex gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-secondary/70 p-2 scrollbar-none',
         className,
       )}
     >
@@ -31,10 +30,10 @@ const FilterBar = ({ categories, active, onChange, className }: FilterBarProps) 
             size="sm"
             onClick={() => onChange(category.value)}
             className={cn(
-              'shrink-0 rounded-full px-4 transition-all duration-200',
+              'shrink-0 rounded-xl px-4 transition-all duration-200',
               isActive
-                ? 'bg-accent text-accent-foreground hover:bg-accent/90 hover:text-accent-foreground'
-                : 'bg-secondary text-secondary-foreground hover:bg-secondary/80',
+                ? 'bg-accent text-accent-foreground shadow-md shadow-accent/25 hover:bg-accent/90 hover:text-accent-foreground'
+                : 'bg-background text-secondary-foreground hover:bg-background/70',
             )}
           >
             {category.label}

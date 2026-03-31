@@ -11,18 +11,28 @@ const CompanyIntro = () => {
           {/* Left: Image placeholder with decorative accent */}
           <ScrollReveal direction="left" duration={0.8}>
             <div className="relative">
-              <div className="aspect-[4/3] w-full overflow-hidden rounded-xl bg-gradient-to-br from-gold-100 to-secondary">
-                <div className="flex h-full w-full items-center justify-center">
-                  <div className="text-center">
-                    <div className="mx-auto mb-3 size-16 rounded-full bg-accent/15" />
-                    <p className="text-sm font-medium text-muted-foreground">
-                      Firma Gorseli
-                    </p>
+              <div className="aspect-[4/3] w-full overflow-hidden rounded-2xl border border-border/60 bg-gradient-to-br from-gold-100 to-secondary">
+                <div
+                  className="h-full w-full bg-cover bg-center"
+                  style={{
+                    backgroundImage:
+                      'url(https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?q=80&w=1400&auto=format&fit=crop)',
+                  }}
+                >
+                  <div className="flex h-full w-full items-end bg-gradient-to-t from-[#0C0A09]/70 via-[#0C0A09]/30 to-transparent p-6">
+                    <div className="rounded-xl border border-white/20 bg-white/10 px-4 py-3 backdrop-blur">
+                      <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-200/90">
+                        Kurumsal Güç
+                      </p>
+                      <p className="mt-1 text-sm font-medium text-white/90">
+                        Güvenilir mühendislik, sürdürülebilir yaklaşım
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
               {/* Decorative gold accent square */}
-              <div className="absolute -bottom-4 -right-4 -z-10 size-24 rounded-lg bg-accent md:-bottom-6 md:-right-6 md:size-32" />
+              <div className="absolute -bottom-5 -right-5 -z-10 size-24 rounded-2xl bg-accent/85 md:-bottom-7 md:-right-7 md:size-32" />
             </div>
           </ScrollReveal>
 

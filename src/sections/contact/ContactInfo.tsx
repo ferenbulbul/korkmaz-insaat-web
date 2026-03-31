@@ -2,7 +2,6 @@ import { MapPin, Phone, Mail, Clock } from 'lucide-react'
 import { Container, SectionWrapper } from '@/components/layout'
 import { StaggerContainer, StaggerItem } from '@/components/motion'
 import { siteConfig } from '@/config/site'
-import { cn } from '@/lib/utils'
 
 interface InfoCard {
   icon: React.ElementType
@@ -47,19 +46,17 @@ const ContactInfo = () => {
 
             return (
               <StaggerItem key={card.title} direction="up">
-                <div
-                  className={cn(
-                    'group flex flex-col items-center rounded-xl border bg-card p-6 text-center',
-                    'transition-shadow duration-300 hover:shadow-lg',
-                  )}
-                >
+                <div className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border/70 bg-card p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-xl hover:shadow-accent/10">
+                  {/* Top accent line */}
+                  <div className="absolute left-0 top-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full" />
+
                   {/* Icon circle */}
-                  <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-accent/10">
+                  <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-accent/8 transition-colors duration-300 group-hover:bg-accent/15">
                     <Icon className="size-6 text-accent" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="mb-2 text-sm font-bold uppercase tracking-wider text-muted-foreground">
+                  <h3 className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
                     {card.title}
                   </h3>
 

@@ -42,15 +42,24 @@ const ContactForm = ({ className }: ContactFormProps) => {
     setIsSubmitting(true)
 
     try {
-      // TODO: Replace with actual API call
-      await new Promise((resolve) => setTimeout(resolve, 1500))
-      console.log('Form data:', data)
-
-      toast.success('Mesajiniz basariyla gonderildi!', {
-        description: 'En kisa surede size donecegiz.',
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       })
 
-      form.reset()
+      const result = await res.json()
+
+      if (result.isSuccess) {
+        toast.success('Mesajiniz basariyla gonderildi!', {
+          description: 'En kisa surede size donecegiz.',
+        })
+        form.reset()
+      } else {
+        toast.error(result.message || 'Bir hata olustu.', {
+          description: 'Lutfen formu kontrol ediniz.',
+        })
+      }
     } catch {
       toast.error('Bir hata olustu.', {
         description: 'Lutfen daha sonra tekrar deneyiniz.',

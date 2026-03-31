@@ -23,6 +23,6 @@ export const SERVICES: Service[] = [
     id: '4',
     icon: 'Paintbrush',
     title: 'Renovasyon',
-    description: 'Mevcut yapıların modernizasyonu ve güçlendirme projelerini uzman kadromuzla gerçekleştiriyoruz.',
+    description: 'Mevcut yapıların modernizasyonu ve güçlendirme projelerini yüksek kalite standartlarıyla gerçekleştiriyoruz.',
   },
 ]

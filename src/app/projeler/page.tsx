@@ -1,22 +1,12 @@
 import type { Metadata } from 'next'
-import Link from 'next/link'
 import Container from '@/components/layout/Container'
 import SectionWrapper from '@/components/layout/SectionWrapper'
-import SectionTitle from '@/components/shared/SectionTitle'
+import { PageHero } from '@/components/shared'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import { ScrollReveal } from '@/components/motion'
 import { ProjectsPageContent } from '@/sections/projects'
 import { PROJECTS } from '@/constants/projects'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
-import {
-  Breadcrumb,
-  BreadcrumbList,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbPage,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb'
 
 export const metadata: Metadata = createMetadata({
   title: 'Projeler',
@@ -35,35 +25,16 @@ const ProjelerPage = () => {
         ]}
       />
 
-      {/* Page header */}
-      <SectionWrapper bgColor="muted" className="py-12 md:py-16">
-        <Container>
-          <ScrollReveal direction="down" distance={20}>
-            <Breadcrumb>
-              <BreadcrumbList>
-                <BreadcrumbItem>
-                  <BreadcrumbLink asChild>
-                    <Link href="/">Ana Sayfa</Link>
-                  </BreadcrumbLink>
-                </BreadcrumbItem>
-                <BreadcrumbSeparator />
-                <BreadcrumbItem>
-                  <BreadcrumbPage>Projeler</BreadcrumbPage>
-                </BreadcrumbItem>
-              </BreadcrumbList>
-            </Breadcrumb>
-          </ScrollReveal>
-
-          <ScrollReveal direction="up">
-            <SectionTitle
-              overline="Portföyümüz"
-              title="Projelerimiz"
-              description="25 yıllık deneyimimizle hayata geçirdiğimiz konut, ticari, altyapı ve renovasyon projelerimizi keşfedin."
-              className="mb-0 mt-6"
-            />
-          </ScrollReveal>
-        </Container>
-      </SectionWrapper>
+      <PageHero
+        title="Projelerimiz"
+        overline="PORTFÖYÜMÜZ"
+        description="25 yıllık deneyimimizle hayata geçirdiğimiz konut, ticari, altyapı ve renovasyon projelerimizi keşfedin."
+        backgroundImage="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2000&auto=format&fit=crop"
+        breadcrumbs={[
+          { label: 'Ana Sayfa', href: '/' },
+          { label: 'Projeler' },
+        ]}
+      />
 
       {/* Projects listing */}
       <SectionWrapper>
