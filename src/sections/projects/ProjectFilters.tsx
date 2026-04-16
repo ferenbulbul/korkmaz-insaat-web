@@ -1,24 +1,24 @@
 'use client'
 
 import FilterBar from '@/components/shared/FilterBar'
-import { PROJECT_CATEGORIES } from '@/types/project'
-import type { ProjectCategory } from '@/types/project'
+import { PROJECT_STATUS_LABELS } from '@/types/project'
+import type { ProjectStatus } from '@/types/project'
 
 interface ProjectFiltersProps {
-  onFilterChange: (category: string) => void
-  activeCategory: string
+  activeStatus: string
+  onStatusChange: (status: string) => void
 }
 
-const categories = (Object.entries(PROJECT_CATEGORIES) as [ProjectCategory, string][]).map(
-  ([value, label]) => ({ value, label })
-)
+const statuses = (
+  Object.entries(PROJECT_STATUS_LABELS) as [ProjectStatus, string][]
+).map(([value, label]) => ({ value, label }))
 
-const ProjectFilters = ({ onFilterChange, activeCategory }: ProjectFiltersProps) => {
+const ProjectFilters = ({ activeStatus, onStatusChange }: ProjectFiltersProps) => {
   return (
     <FilterBar
-      categories={categories}
-      active={activeCategory}
-      onChange={onFilterChange}
+      categories={statuses}
+      active={activeStatus}
+      onChange={onStatusChange}
       className="mb-8 md:mb-10"
     />
   )

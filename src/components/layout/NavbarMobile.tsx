@@ -1,8 +1,9 @@
 'use client'
 
+import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Phone, Mail } from 'lucide-react'
+import { Phone, Mail, ChevronDown } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { NAV_ITEMS } from '@/constants/navigation'
 import { siteConfig } from '@/config/site'
@@ -24,9 +25,14 @@ interface NavbarMobileProps {
 
 const NavbarMobile = ({ open, onOpenChange }: NavbarMobileProps) => {
   const pathname = usePathname()
+  const [expandedItem, setExpandedItem] = useState<string | null>(null)
 
   const handleLinkClick = () => {
     onOpenChange(false)
+  }
+
+  const toggleExpand = (href: string) => {
+    setExpandedItem((prev) => (prev === href ? null : href))
   }
 
   return (
@@ -49,21 +55,54 @@ const NavbarMobile = ({ open, onOpenChange }: NavbarMobileProps) => {
                 item.href === '/'
                   ? pathname === '/'
                   : pathname.startsWith(item.href)
+              const hasChildren = item.children && item.children.length > 0
+              const isExpanded = expandedItem === item.href
 
               return (
                 <li key={item.href}>
-                  <Link
-                    href={item.href}
-                    onClick={handleLinkClick}
-                    className={cn(
-                      'flex items-center rounded-md px-4 py-3 text-sm font-medium transition-colors',
-                      isActive
-                        ? 'bg-accent/10 text-accent font-semibold'
-                        : 'text-foreground/70 hover:bg-secondary hover:text-foreground'
+                  <div className="flex items-center">
+                    <Link
+                      href={item.href}
+                      onClick={handleLinkClick}
+                      className={cn(
+                        'flex flex-1 items-center rounded-md px-4 py-3 text-sm font-medium transition-colors',
+                        isActive
+                          ? 'bg-accent/10 text-accent font-semibold'
+                          : 'text-foreground/70 hover:bg-secondary hover:text-foreground'
+                      )}
+                    >
+                      {item.label}
+                    </Link>
+                    {hasChildren && (
+                      <button
+                        onClick={() => toggleExpand(item.href)}
+                        className="flex size-10 items-center justify-center rounded-md text-foreground/50 transition-colors hover:bg-secondary hover:text-foreground"
+                        aria-label={isExpanded ? 'Alt menuyu kapat' : 'Alt menuyu ac'}
+                      >
+                        <ChevronDown className={cn(
+                          'size-4 transition-transform duration-200',
+                          isExpanded && 'rotate-180'
+                        )} />
+                      </button>
                     )}
-                  >
-                    {item.label}
-                  </Link>
+                  </div>
+
+                  {/* Children submenu */}
+                  {hasChildren && isExpanded && (
+                    <ul className="ml-4 mt-1 space-y-0.5 border-l-2 border-accent/20 pl-3">
+                      {item.children!.map((child) => (
+                        <li key={child.href}>
+                          <Link
+                            href={child.href}
+                            onClick={handleLinkClick}
+                            className="flex items-center rounded-md px-3 py-2.5 text-sm text-foreground/60 transition-colors hover:bg-secondary hover:text-foreground"
+                          >
+                            {child.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
                 </li>
               )
             })}

@@ -3,10 +3,12 @@ import { ArrowRight } from 'lucide-react'
 import { Container, SectionWrapper } from '@/components/layout'
 import { SectionTitle, ProjectCard } from '@/components/shared'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/motion'
-import { PROJECTS } from '@/constants/projects'
+import { getFeaturedProjects } from '@/services/projects'
 
-const ProjectsShowcase = () => {
-  const featuredProjects = PROJECTS.filter((p) => p.featured).slice(0, 6)
+const ProjectsShowcase = async () => {
+  const featuredProjects = await getFeaturedProjects(6)
+
+  if (featuredProjects.length === 0) return null
 
   return (
     <SectionWrapper id="projeler" bgColor="white">

@@ -8,18 +8,24 @@ interface FilterBarProps {
   active: string
   onChange: (value: string) => void
   className?: string
+  label?: string
 }
 
-const FilterBar = ({ categories, active, onChange, className }: FilterBarProps) => {
+const FilterBar = ({ categories, active, onChange, className, label }: FilterBarProps) => {
   const allCategories = [{ value: 'all', label: 'Tumu' }, ...categories]
 
   return (
     <div
       className={cn(
-        'flex gap-2 overflow-x-auto rounded-2xl border border-border/70 bg-secondary/70 p-2 scrollbar-none',
+        'flex flex-wrap items-center gap-2',
         className,
       )}
     >
+      {label && (
+        <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          {label}
+        </span>
+      )}
       {allCategories.map((category) => {
         const isActive = active === category.value
 
@@ -30,10 +36,10 @@ const FilterBar = ({ categories, active, onChange, className }: FilterBarProps) 
             size="sm"
             onClick={() => onChange(category.value)}
             className={cn(
-              'shrink-0 rounded-xl px-4 transition-all duration-200',
+              'shrink-0 rounded-full border px-5 transition-all duration-200',
               isActive
-                ? 'bg-accent text-accent-foreground shadow-md shadow-accent/25 hover:bg-accent/90 hover:text-accent-foreground'
-                : 'bg-background text-secondary-foreground hover:bg-background/70',
+                ? 'border-accent bg-accent text-white shadow-md shadow-accent/25 hover:bg-accent/90 hover:text-white'
+                : 'border-border bg-white text-foreground/70 hover:border-foreground/20 hover:bg-secondary hover:text-foreground',
             )}
           >
             {category.label}

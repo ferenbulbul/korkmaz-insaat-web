@@ -1,21 +1,28 @@
+import { Suspense } from 'react'
 import type { Metadata } from 'next'
 import Container from '@/components/layout/Container'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import { PageHero } from '@/components/shared'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
 import { ProjectsPageContent } from '@/sections/projects'
-import { PROJECTS } from '@/constants/projects'
+import { getProjects } from '@/services/projects'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
 export const metadata: Metadata = createMetadata({
   title: 'Projeler',
   description:
-    'Korkmaz İnşaat olarak tamamladığımız konut, ticari, altyapı ve renovasyon projelerimizi inceleyin.',
+    'Korkmaz İnşaat olarak tamamladığımız konut, ticari ve karma projelerimizi inceleyin.',
   alternates: { canonical: '/projeler' },
 })
 
-const ProjelerPage = () => {
+// Always fresh — admin edits reflect immediately.
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+const ProjelerPage = async () => {
+  const projects = await getProjects()
+
   return (
     <>
       <BreadcrumbSchema
@@ -27,9 +34,9 @@ const ProjelerPage = () => {
 
       <PageHero
         title="Projelerimiz"
-        overline="PORTFÖYÜMÜZ"
-        description="25 yıllık deneyimimizle hayata geçirdiğimiz konut, ticari, altyapı ve renovasyon projelerimizi keşfedin."
-        backgroundImage="https://images.unsplash.com/photo-1600585152220-90363fe7e115?q=80&w=2000&auto=format&fit=crop"
+        overline="PORTFOYUMUZ"
+        description="25 yillik deneyimimizle hayata gecirdigimiz konut, ticari ve karma projelerimizi kesfedin."
+        backgroundImage="/images/hero/projeler-hero.jpg"
         breadcrumbs={[
           { label: 'Ana Sayfa', href: '/' },
           { label: 'Projeler' },
@@ -39,7 +46,9 @@ const ProjelerPage = () => {
       {/* Projects listing */}
       <SectionWrapper>
         <Container>
-          <ProjectsPageContent projects={PROJECTS} />
+          <Suspense>
+            <ProjectsPageContent projects={projects} />
+          </Suspense>
         </Container>
       </SectionWrapper>
     </>

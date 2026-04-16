@@ -1,19 +1,74 @@
+'use client'
+
+import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { ChevronDown, ArrowRight } from 'lucide-react'
+import useEmblaCarousel from 'embla-carousel-react'
+import Autoplay from 'embla-carousel-autoplay'
+import Fade from 'embla-carousel-fade'
+import { cn } from '@/lib/utils'
 import { Container } from '@/components/layout'
 import { ScrollReveal } from '@/components/motion'
 
+const HERO_IMAGES = [
+  { url: '/images/hero/hero-1.jpg', alt: 'Insaat sahasi genel gorunum' },
+  { url: '/images/hero/hero-2.jpg', alt: 'Modern konut projesi' },
+  { url: '/images/hero/hero-3.jpg', alt: 'Ticari yapi projesi' },
+  { url: '/images/hero/hero-4.jpg', alt: 'Luks konut dis cephe' },
+  { url: '/images/hero/hero-5.jpg', alt: 'Modern ic mekan tasarimi' },
+]
+
 const HeroSection = () => {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true },
+    [
+      Autoplay({ delay: 5000, stopOnInteraction: false }),
+      Fade(),
+    ]
+  )
+
+  const onSelect = useCallback(() => {
+    if (!emblaApi) return
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+  }, [emblaApi])
+
+  useEffect(() => {
+    if (!emblaApi) return
+    onSelect()
+    emblaApi.on('select', onSelect)
+    return () => { emblaApi.off('select', onSelect) }
+  }, [emblaApi, onSelect])
+
+  const scrollTo = useCallback(
+    (index: number) => emblaApi?.scrollTo(index),
+    [emblaApi]
+  )
+
   return (
     <section className="noise-overlay relative -mt-20 flex min-h-screen items-center overflow-hidden">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-        style={{
-          backgroundImage:
-            'url(https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070&auto=format&fit=crop)',
-        }}
-      />
+      {/* Background carousel */}
+      <div ref={emblaRef} className="absolute inset-0 overflow-hidden">
+        <div className="flex h-full">
+          {HERO_IMAGES.map((img, index) => (
+            <div
+              key={index}
+              className="relative min-w-0 shrink-0 grow-0 basis-full"
+            >
+              <Image
+                src={img.url}
+                alt={img.alt}
+                fill
+                className="object-cover"
+                priority={index === 0}
+                sizes="100vw"
+              />
+            </div>
+          ))}
+        </div>
+      </div>
 
       {/* Dark overlay — deep charcoal with asymmetric gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#0C0A09]/95 via-[#0C0A09]/75 to-[#0C0A09]/40" />
@@ -97,6 +152,25 @@ const HeroSection = () => {
               >
                 Bize Ulasin
               </Link>
+            </div>
+          </ScrollReveal>
+
+          {/* Dot indicators */}
+          <ScrollReveal direction="up" delay={1.0} distance={15}>
+            <div className="flex items-center gap-2">
+              {HERO_IMAGES.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => scrollTo(index)}
+                  aria-label={`${index + 1}. resme git`}
+                  className={cn(
+                    'h-1.5 rounded-full transition-all duration-300',
+                    index === selectedIndex
+                      ? 'w-8 bg-white'
+                      : 'w-1.5 bg-white/40 hover:bg-white/60'
+                  )}
+                />
+              ))}
             </div>
           </ScrollReveal>
         </div>

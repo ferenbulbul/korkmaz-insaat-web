@@ -1,8 +1,8 @@
 import type { MetadataRoute } from 'next'
-import { PROJECTS } from '@/constants/projects'
+import { getProjects } from '@/services/projects'
 import { siteConfig } from '@/config/site'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: siteConfig.url,
@@ -30,9 +30,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
   ]
 
-  const projectPages: MetadataRoute.Sitemap = PROJECTS.map((project) => ({
+  const projects = await getProjects()
+  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
     url: `${siteConfig.url}/projeler/${project.slug}`,
-    lastModified: new Date(project.createdAt),
+    lastModified: new Date(project.updatedAt),
     changeFrequency: 'monthly' as const,
     priority: 0.8,
   }))

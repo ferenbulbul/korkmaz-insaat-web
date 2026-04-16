@@ -4,7 +4,7 @@ import { ProjectDetail, ProjectGallery } from '@/sections/projects'
 import CTABanner from '@/components/shared/CTABanner'
 import { ScrollReveal } from '@/components/motion'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import { PROJECTS } from '@/constants/projects'
+import { getProjectBySlug, getAllProjectSlugs } from '@/services/projects'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
@@ -12,17 +12,18 @@ interface PageProps {
   params: Promise<{ slug: string }>
 }
 
-// Generate static paths for all projects
-export const generateStaticParams = () => {
-  return PROJECTS.map((project) => ({
-    slug: project.slug,
-  }))
+export const dynamic = 'force-dynamic'
+export const revalidate = 0
+
+// Build static paths at build time — admin-added projects will be rendered on-demand
+export const generateStaticParams = async () => {
+  const slugs = await getAllProjectSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
-// Generate dynamic metadata per project
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug } = await params
-  const project = PROJECTS.find((p) => p.slug === slug)
+  const project = await getProjectBySlug(slug)
 
   if (!project) {
     return createMetadata({
@@ -45,7 +46,7 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 
 const ProjectDetailPage = async ({ params }: PageProps) => {
   const { slug } = await params
-  const project = PROJECTS.find((p) => p.slug === slug)
+  const project = await getProjectBySlug(slug)
 
   if (!project) {
     notFound()
