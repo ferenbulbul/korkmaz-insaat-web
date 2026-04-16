@@ -4,7 +4,7 @@ import { ProjectDetail, ProjectGallery } from '@/sections/projects'
 import CTABanner from '@/components/shared/CTABanner'
 import { ScrollReveal } from '@/components/motion'
 import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
-import { getProjectBySlug, getAllProjectSlugs } from '@/services/projects'
+import { getProjectBySlug } from '@/services/projects'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
@@ -14,12 +14,6 @@ interface PageProps {
 
 export const dynamic = 'force-dynamic'
 export const revalidate = 0
-
-// Build static paths at build time — admin-added projects will be rendered on-demand
-export const generateStaticParams = async () => {
-  const slugs = await getAllProjectSlugs()
-  return slugs.map((slug) => ({ slug }))
-}
 
 export const generateMetadata = async ({ params }: PageProps): Promise<Metadata> => {
   const { slug } = await params

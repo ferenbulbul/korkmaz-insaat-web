@@ -30,13 +30,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const projects = await getProjects()
-  const projectPages: MetadataRoute.Sitemap = projects.map((project) => ({
-    url: `${siteConfig.url}/projeler/${project.slug}`,
-    lastModified: new Date(project.updatedAt),
-    changeFrequency: 'monthly' as const,
-    priority: 0.8,
-  }))
+  // Fetch projects defensively — if Supabase env vars are missing during build
+  // (e.g. preview deploys without secrets), fall back to static pages only.
+  let projectPages: MetadataRoute.Sitemap = []
+  try {
+    const projects = await getProjects()
+    projectPages = projects.map((project) => ({
+      url: `${siteConfig.url}/projeler/${project.slug}`,
+      lastModified: new Date(project.updatedAt),
+      changeFrequency: 'monthly' as const,
+      priority: 0.8,
+    }))
+  } catch (err) {
+    console.warn('[sitemap] Could not fetch projects:', err)
+  }
 
   return [...staticPages, ...projectPages]
 }
