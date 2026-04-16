@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { getProjects } from '@/services/projects'
+import { getProjectsForSitemap } from '@/services/projects'
 import { siteConfig } from '@/config/site'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -34,7 +34,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // (e.g. preview deploys without secrets), fall back to static pages only.
   let projectPages: MetadataRoute.Sitemap = []
   try {
-    const projects = await getProjects()
+    const projects = await getProjectsForSitemap()
     projectPages = projects.map((project) => ({
       url: `${siteConfig.url}/projeler/${project.slug}`,
       lastModified: new Date(project.updatedAt),

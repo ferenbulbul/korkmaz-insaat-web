@@ -85,6 +85,25 @@ export const getAllProjectSlugs = async (): Promise<string[]> => {
   return (data as { slug: string }[]).map((r) => r.slug)
 }
 
+// Lightweight, cookieless fetch for static routes (sitemap, etc.)
+// Uses admin client which works without a request context.
+export const getProjectsForSitemap = async (): Promise<
+  { slug: string; updatedAt: string }[]
+> => {
+  const supabase = createSupabaseAdminClient()
+  const { data, error } = await supabase
+    .from('projects')
+    .select('slug, updated_at')
+  if (error) {
+    console.error('[getProjectsForSitemap]', error)
+    return []
+  }
+  return (data as { slug: string; updated_at: string }[]).map((r) => ({
+    slug: r.slug,
+    updatedAt: r.updated_at,
+  }))
+}
+
 // ============================================================
 // ADMIN WRITES — service_role client (bypasses RLS)
 // ============================================================
