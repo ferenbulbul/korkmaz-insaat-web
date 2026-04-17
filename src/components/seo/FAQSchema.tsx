@@ -1,0 +1,29 @@
+import JsonLd from './JsonLd'
+
+export interface FAQItem {
+  question: string
+  answer: string
+}
+
+interface FAQSchemaProps {
+  items: FAQItem[]
+}
+
+const FAQSchema = ({ items }: FAQSchemaProps) => {
+  const data = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: items.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  }
+
+  return <JsonLd data={data} />
+}
+
+export default FAQSchema

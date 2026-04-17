@@ -6,6 +6,7 @@ interface SectionTitleProps {
   description?: string
   alignment?: 'left' | 'center'
   dark?: boolean
+  serif?: boolean
   className?: string
 }
 
@@ -15,6 +16,7 @@ const SectionTitle = ({
   description,
   alignment = 'left',
   dark = false,
+  serif = false,
   className,
 }: SectionTitleProps) => {
   const isCenter = alignment === 'center'
@@ -29,18 +31,22 @@ const SectionTitle = ({
     >
       {overline && (
         <div className={cn('mb-4 flex items-center gap-3', isCenter && 'justify-center')}>
-          <div className="h-[1px] w-8 bg-accent" />
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-accent md:text-xs">
+          <div className="h-[1px] w-12 bg-accent" />
+          <p className="text-[11px] font-semibold uppercase tracking-[0.3em] text-accent md:text-xs">
             {overline}
           </p>
-          {isCenter && <div className="h-[1px] w-8 bg-accent" />}
+          {isCenter && <div className="h-[1px] w-12 bg-accent" />}
         </div>
       )}
       <h2
         className={cn(
-          'text-3xl font-extrabold tracking-tight md:text-4xl lg:text-5xl',
+          'tracking-tight',
+          serif
+            ? 'font-display text-4xl font-normal leading-[1.05] md:text-5xl lg:text-6xl'
+            : 'text-3xl font-extrabold md:text-4xl lg:text-5xl',
           dark ? 'text-primary-foreground' : 'text-foreground',
         )}
+        style={serif ? { fontVariationSettings: "'opsz' 72" } : undefined}
       >
         {title}
       </h2>

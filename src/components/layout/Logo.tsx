@@ -19,16 +19,16 @@ const Logo = ({ variant = 'dark', size = 'md', className }: LogoProps) => {
     <Link
       href="/"
       className={cn(
-        'inline-flex items-center overflow-hidden rounded-md',
+        'inline-flex items-center',
         variant === 'light' && 'bg-white/95 px-2 py-1',
         className
       )}
     >
       <Image
-        src="/logo.jpeg"
-        alt="Korkmaz Insaat"
-        width={200}
-        height={200}
+        src="/logo.png"
+        alt="Korkmaz İnşaat"
+        width={1249}
+        height={1431}
         className={cn('w-auto object-contain', heightMap[size])}
         priority
       />

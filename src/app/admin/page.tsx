@@ -1,6 +1,7 @@
 import Link from 'next/link'
-import { Plus, Star, Edit, MapPin, Ruler, ImageOff } from 'lucide-react'
+import { Plus, Star, Edit, MapPin, Ruler, ImageOff, FileText } from 'lucide-react'
 import { getAllProjectsForAdmin } from '@/services/projects'
+import { getAllBlogPostsForAdmin } from '@/services/blog'
 import {
   PROJECT_CATEGORIES,
   PROJECT_STATUS_LABELS,
@@ -11,13 +12,38 @@ import DeleteProjectButton from '@/components/admin/DeleteProjectButton'
 export const revalidate = 0
 
 const AdminDashboardPage = async () => {
-  const projects = await getAllProjectsForAdmin()
+  const [projects, blogPosts] = await Promise.all([
+    getAllProjectsForAdmin(),
+    getAllBlogPostsForAdmin(),
+  ])
 
   return (
     <>
-      <AdminHeader title="Projeler" subtitle={`${projects.length} proje`} />
+      <AdminHeader title="Yonetim Paneli" subtitle={`${projects.length} proje, ${blogPosts.length} yazi`} />
 
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        {/* Blog quick link */}
+        <div className="mb-8 rounded-xl border border-border bg-white p-5 shadow-sm">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className="flex size-10 items-center justify-center rounded-lg bg-accent/10">
+                <FileText className="size-5 text-accent" />
+              </div>
+              <div>
+                <h2 className="text-sm font-semibold text-foreground">Blog Yazilari</h2>
+                <p className="text-xs text-muted-foreground">{blogPosts.length} yazi ({blogPosts.filter(p => p.status === 'published').length} yayinda)</p>
+              </div>
+            </div>
+            <Link
+              href="/admin/yazilar"
+              className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-secondary"
+            >
+              <FileText className="size-4" />
+              Yazilari Yonet
+            </Link>
+          </div>
+        </div>
+
         <div className="mb-6 flex items-center justify-between">
           <p className="text-sm text-muted-foreground">
             Tum projeleri goruntuleyin, duzenleyin ve yonetin.

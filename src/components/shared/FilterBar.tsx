@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 interface FilterBarProps {
@@ -12,17 +11,17 @@ interface FilterBarProps {
 }
 
 const FilterBar = ({ categories, active, onChange, className, label }: FilterBarProps) => {
-  const allCategories = [{ value: 'all', label: 'Tumu' }, ...categories]
+  const allCategories = [{ value: 'all', label: 'Tümü' }, ...categories]
 
   return (
     <div
       className={cn(
-        'flex flex-wrap items-center gap-2',
+        'flex flex-wrap items-center gap-x-6 gap-y-3',
         className,
       )}
     >
       {label && (
-        <span className="shrink-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span className="shrink-0 text-[11px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
           {label}
         </span>
       )}
@@ -30,20 +29,26 @@ const FilterBar = ({ categories, active, onChange, className, label }: FilterBar
         const isActive = active === category.value
 
         return (
-          <Button
+          <button
             key={category.value}
-            variant="ghost"
-            size="sm"
+            type="button"
             onClick={() => onChange(category.value)}
             className={cn(
-              'shrink-0 rounded-full border px-5 transition-all duration-200',
+              'relative shrink-0 pb-2 pt-1 text-sm transition-colors duration-200',
               isActive
-                ? 'border-accent bg-accent text-white shadow-md shadow-accent/25 hover:bg-accent/90 hover:text-white'
-                : 'border-border bg-white text-foreground/70 hover:border-foreground/20 hover:bg-secondary hover:text-foreground',
+                ? 'font-semibold text-foreground'
+                : 'text-muted-foreground hover:text-foreground',
             )}
           >
             {category.label}
-          </Button>
+            <span
+              className={cn(
+                'absolute inset-x-0 bottom-0 h-[2px] bg-accent transition-transform duration-300 ease-out',
+                isActive ? 'scale-x-100' : 'scale-x-0',
+              )}
+              style={{ transformOrigin: 'left' }}
+            />
+          </button>
         )
       })}
     </div>

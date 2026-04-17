@@ -12,6 +12,7 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   { label: 'Hakkımızda', href: '/hakkimizda' },
+  { label: 'Blog', href: '/blog' },
   { label: 'İletişim', href: '/iletisim' },
 ]
 
@@ -22,6 +23,7 @@ export const FOOTER_SECTIONS: FooterSection[] = [
       { label: 'Ana Sayfa', href: '/' },
       { label: 'Projeler', href: '/projeler' },
       { label: 'Hakkımızda', href: '/hakkimizda' },
+      { label: 'Blog', href: '/blog' },
       { label: 'İletişim', href: '/iletisim' },
     ],
   },

@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { ChevronDown, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
@@ -12,11 +12,11 @@ import { Container } from '@/components/layout'
 import { ScrollReveal } from '@/components/motion'
 
 const HERO_IMAGES = [
-  { url: '/images/hero/hero-1.jpg', alt: 'Insaat sahasi genel gorunum' },
+  { url: '/images/hero/hero-1.jpg', alt: 'İnşaat sahası genel görünüm' },
   { url: '/images/hero/hero-2.jpg', alt: 'Modern konut projesi' },
-  { url: '/images/hero/hero-3.jpg', alt: 'Ticari yapi projesi' },
-  { url: '/images/hero/hero-4.jpg', alt: 'Luks konut dis cephe' },
-  { url: '/images/hero/hero-5.jpg', alt: 'Modern ic mekan tasarimi' },
+  { url: '/images/hero/hero-3.jpg', alt: 'Ticari yapı projesi' },
+  { url: '/images/hero/hero-4.jpg', alt: 'Lüks konut dış cephe' },
+  { url: '/images/hero/hero-5.jpg', alt: 'Modern iç mekan tasarımı' },
 ]
 
 const HeroSection = () => {
@@ -46,6 +46,9 @@ const HeroSection = () => {
     (index: number) => emblaApi?.scrollTo(index),
     [emblaApi]
   )
+
+  const activeLabel = String(selectedIndex + 1).padStart(2, '0')
+  const totalLabel = String(HERO_IMAGES.length).padStart(2, '0')
 
   return (
     <section className="noise-overlay relative -mt-20 flex min-h-screen items-center overflow-hidden">
@@ -88,14 +91,18 @@ const HeroSection = () => {
       {/* Vertical gold accent line */}
       <div className="pointer-events-none absolute bottom-0 left-12 top-0 hidden w-px bg-gradient-to-b from-transparent via-gold-500/20 to-transparent lg:block" />
 
-      {/* Corner frame accents — architectural framing */}
-      <div className="pointer-events-none absolute left-8 top-28 hidden lg:block">
-        <div className="h-24 w-px bg-gradient-to-b from-gold-300/40 to-transparent" />
-        <div className="absolute left-0 top-0 h-px w-24 bg-gradient-to-r from-gold-300/40 to-transparent" />
+      {/* Tick corner frames — architectural */}
+      <div className="pointer-events-none absolute left-8 top-28 hidden size-10 lg:block">
+        <span className="tick-corner tl" />
       </div>
-      <div className="pointer-events-none absolute bottom-32 right-8 hidden lg:block">
-        <div className="h-24 w-px bg-gradient-to-t from-gold-300/40 to-transparent" />
-        <div className="absolute bottom-0 right-0 h-px w-24 bg-gradient-to-l from-gold-300/40 to-transparent" />
+      <div className="pointer-events-none absolute right-8 top-28 hidden size-10 lg:block">
+        <span className="tick-corner tr" />
+      </div>
+      <div className="pointer-events-none absolute bottom-28 left-8 hidden size-10 lg:block">
+        <span className="tick-corner bl" />
+      </div>
+      <div className="pointer-events-none absolute bottom-28 right-8 hidden size-10 lg:block">
+        <span className="tick-corner br" />
       </div>
 
       {/* Content */}
@@ -106,20 +113,26 @@ const HeroSection = () => {
             <div className="gold-shimmer h-[2px] w-20 rounded-full" />
           </ScrollReveal>
 
-          {/* Overline */}
+          {/* Overline luxe */}
           <ScrollReveal direction="down" delay={0.25} distance={25}>
-            <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-gold-300/80">
-              1999&apos;dan beri guvenin adresi
-            </p>
+            <div className="flex items-center gap-4">
+              <span className="hairline-gold-solid" />
+              <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-gold-300/90">
+                1999&apos;dan beri güvenin adresi
+              </p>
+            </div>
           </ScrollReveal>
 
-          {/* Main title — architectural weight */}
+          {/* Main title — "Insa" serif italic emphasis */}
           <ScrollReveal direction="up" delay={0.45} distance={40}>
             <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Guvenle{' '}
+              Güvenle{' '}
               <span className="relative inline-block">
-                <span className="bg-gradient-to-r from-gold-200 via-gold-400 to-gold-300 bg-clip-text text-transparent">
-                  Insa
+                <span
+                  className="bg-gradient-to-r from-gold-200 via-gold-400 to-gold-300 bg-clip-text font-display font-normal italic text-transparent"
+                  style={{ fontVariationSettings: "'opsz' 144" }}
+                >
+                  İnşa
                 </span>
                 <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-gold-500 to-transparent" />
               </span>{' '}
@@ -130,9 +143,9 @@ const HeroSection = () => {
           {/* Subtitle */}
           <ScrollReveal direction="up" delay={0.65} distance={30}>
             <p className="max-w-xl text-base leading-relaxed text-white/55 md:text-lg">
-              25 yili askin deneyimimizle, modern muhendislik cozumleri ve
-              ustun kalite standartlariyla hayalinizdeki yapilari
-              saglam temeller uzerine insa ediyoruz.
+              25 yılı aşkın deneyimimizle, modern mühendislik çözümleri ve
+              üstün kalite standartlarıyla hayalinizdeki yapıları
+              sağlam temeller üzerine inşa ediyoruz.
             </p>
           </ScrollReveal>
 
@@ -141,53 +154,88 @@ const HeroSection = () => {
             <div className="mt-2 flex flex-col items-start gap-4 sm:flex-row">
               <Link
                 href="/projeler"
-                className="group inline-flex h-13 items-center justify-center gap-2 rounded-lg bg-accent px-8 text-[15px] font-semibold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:bg-accent/90 hover:shadow-xl hover:shadow-accent/30 active:scale-[0.98]"
+                className="group inline-flex h-12 items-center justify-center gap-2 rounded-lg bg-accent px-8 font-sans text-sm font-semibold text-white shadow-lg shadow-accent/20 transition-all duration-300 hover:bg-accent/90 hover:shadow-xl hover:shadow-accent/30 active:scale-[0.98]"
               >
-                Projelerimizi Inceleyin
+                Projelerimizi İnceleyin
                 <ArrowRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
               </Link>
               <Link
                 href="/iletisim"
-                className="inline-flex h-13 items-center justify-center rounded-lg border border-white/20 px-8 text-[15px] font-semibold text-white/90 transition-all duration-300 hover:border-gold-500/40 hover:bg-white/5 hover:text-white active:scale-[0.98]"
+                className="inline-flex h-12 items-center justify-center rounded-lg border border-white/20 px-8 font-sans text-sm font-semibold text-white/90 transition-all duration-300 hover:border-gold-500/40 hover:bg-white/5 hover:text-white active:scale-[0.98]"
               >
-                Bize Ulasin
+                Bize Ulaşın
               </Link>
-            </div>
-          </ScrollReveal>
-
-          {/* Dot indicators */}
-          <ScrollReveal direction="up" delay={1.0} distance={15}>
-            <div className="flex items-center gap-2">
-              {HERO_IMAGES.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => scrollTo(index)}
-                  aria-label={`${index + 1}. resme git`}
-                  className={cn(
-                    'h-1.5 rounded-full transition-all duration-300',
-                    index === selectedIndex
-                      ? 'w-8 bg-white'
-                      : 'w-1.5 bg-white/40 hover:bg-white/60'
-                  )}
-                />
-              ))}
             </div>
           </ScrollReveal>
         </div>
       </Container>
 
-      {/* Scroll indicator */}
+      {/* Vertical slide counter — bottom right */}
+      <div className="absolute bottom-20 right-6 z-10 hidden flex-col items-end gap-3 md:right-10 md:flex">
+        <div className="flex flex-col items-end gap-1">
+          {HERO_IMAGES.map((_, index) => {
+            const isActive = index === selectedIndex
+            const label = String(index + 1).padStart(2, '0')
+            return (
+              <button
+                key={index}
+                onClick={() => scrollTo(index)}
+                aria-label={`${index + 1}. resme geç`}
+                className={cn(
+                  'font-display text-sm leading-none transition-all duration-300',
+                  isActive
+                    ? 'text-2xl font-normal text-white'
+                    : 'text-xs text-white/35 hover:text-white/60',
+                )}
+                style={{ fontVariationSettings: "'opsz' 72" }}
+              >
+                {label}
+              </button>
+            )
+          })}
+        </div>
+        <div className="flex items-center gap-3">
+          <span
+            className="font-display text-sm text-gold-300"
+            style={{ fontVariationSettings: "'opsz' 72" }}
+          >
+            {activeLabel}
+          </span>
+          <span className="h-px w-10 bg-gold-500/40" />
+          <span className="font-display text-xs text-white/40">{totalLabel}</span>
+        </div>
+      </div>
+
+      {/* Mobile dot indicators (retained for small screens) */}
+      <div className="absolute bottom-20 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 md:hidden">
+        {HERO_IMAGES.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => scrollTo(index)}
+            aria-label={`${index + 1}. resme geç`}
+            className={cn(
+              'h-1.5 rounded-full transition-all duration-300',
+              index === selectedIndex
+                ? 'w-8 bg-white'
+                : 'w-1.5 bg-white/40 hover:bg-white/60'
+            )}
+          />
+        ))}
+      </div>
+
+      {/* Scroll indicator — vertical line + arrow */}
       <ScrollReveal
         direction="up"
         delay={1.2}
         distance={15}
-        className="absolute bottom-12 left-1/2 z-10 -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 z-10 -translate-x-1/2"
       >
-        <div className="flex animate-bounce flex-col items-center gap-1.5 text-white/30">
-          <span className="text-[10px] font-medium uppercase tracking-[0.25em]">
-            Kesfet
+        <div className="flex flex-col items-center gap-2 text-white/40">
+          <span className="text-[10px] font-medium uppercase tracking-[0.35em]">
+            Keşfet
           </span>
-          <ChevronDown className="size-4" />
+          <span className="block h-10 w-px origin-top animate-draw-vertical bg-gradient-to-b from-gold-400/70 to-transparent" />
+          <span className="font-display text-sm text-gold-300/80">&darr;</span>
         </div>
       </ScrollReveal>
     </section>

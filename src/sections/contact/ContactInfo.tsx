@@ -30,7 +30,7 @@ const infoCards: InfoCard[] = [
   },
   {
     icon: Clock,
-    title: 'Calisma Saatleri',
+    title: 'Çalışma Saatleri',
     content: 'Pazartesi - Cuma: 08:00 - 18:00\nCumartesi: 09:00 - 14:00',
   },
 ]
@@ -40,25 +40,37 @@ const ContactInfo = () => {
     <SectionWrapper bgColor="white">
       <Container>
         <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {infoCards.map((card) => {
+          {infoCards.map((card, index) => {
             const Icon = card.icon
             const ContentWrapper = card.href ? 'a' : 'div'
+            const indexLabel = String(index + 1).padStart(2, '0')
 
             return (
               <StaggerItem key={card.title} direction="up">
-                <div className="group relative flex flex-col items-center overflow-hidden rounded-2xl border border-border/70 bg-card p-6 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/20 hover:shadow-xl hover:shadow-accent/10">
-                  {/* Top accent line */}
-                  <div className="absolute left-0 top-0 h-[2px] w-0 bg-accent transition-all duration-500 group-hover:w-full" />
+                <div className="group relative flex h-full flex-col overflow-hidden rounded-2xl border border-border/60 bg-card p-7 transition-all duration-300 hover:border-accent/30 hover:shadow-lg">
+                  {/* Animated top accent */}
+                  <span className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-accent via-gold-300 to-accent/0 transition-transform duration-700 ease-out group-hover:scale-x-100" />
 
-                  {/* Icon circle */}
-                  <div className="mb-4 flex size-14 items-center justify-center rounded-full bg-accent/8 transition-colors duration-300 group-hover:bg-accent/15">
-                    <Icon className="size-6 text-accent" />
+                  {/* Header: index + icon */}
+                  <div className="mb-6 flex items-start justify-between">
+                    <span
+                      className="index-number text-2xl opacity-30 transition-opacity duration-500 group-hover:opacity-60"
+                      style={{ fontVariationSettings: "'opsz' 72" }}
+                    >
+                      {indexLabel}
+                    </span>
+                    <Icon className="size-6 text-gold-500" />
                   </div>
 
                   {/* Title */}
-                  <h3 className="mb-2 text-xs font-bold uppercase tracking-[0.18em] text-muted-foreground">
+                  <h3 className="mb-1 text-[11px] font-semibold uppercase tracking-[0.25em] text-muted-foreground">
                     {card.title}
                   </h3>
+
+                  {/* Hairline */}
+                  <div className="relative mb-4 mt-3 h-px bg-border/50">
+                    <span className="absolute left-0 top-0 h-full w-10 bg-gold-500/50 transition-all duration-500 ease-out group-hover:w-full group-hover:bg-gold-500/30" />
+                  </div>
 
                   {/* Content */}
                   <ContentWrapper

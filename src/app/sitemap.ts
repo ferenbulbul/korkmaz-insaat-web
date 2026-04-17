@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { getProjectsForSitemap } from '@/services/projects'
+import { getBlogPostsForSitemap } from '@/services/blog'
 import { siteConfig } from '@/config/site'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
@@ -28,6 +29,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
+    {
+      url: `${siteConfig.url}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.8,
+    },
   ]
 
   // Fetch projects defensively — if Supabase env vars are missing during build
@@ -45,5 +52,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn('[sitemap] Could not fetch projects:', err)
   }
 
-  return [...staticPages, ...projectPages]
+  // Fetch blog posts
+  let blogPages: MetadataRoute.Sitemap = []
+  try {
+    const blogPosts = await getBlogPostsForSitemap()
+    blogPages = blogPosts.map((post) => ({
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      lastModified: new Date(post.updatedAt),
+      changeFrequency: 'weekly' as const,
+      priority: 0.7,
+    }))
+  } catch (err) {
+    console.warn('[sitemap] Could not fetch blog posts:', err)
+  }
+
+  return [...staticPages, ...projectPages, ...blogPages]
 }

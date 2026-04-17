@@ -5,9 +5,9 @@ import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
 export const metadata = createMetadata({
-  title: 'Iletisim',
+  title: 'İletişim | Gönen Korkmaz İnşaat',
   description:
-    'Korkmaz Insaat ile iletisime gecin. Projeleriniz icin teklif alin, sorularinizi iletin. Telefon, e-posta ve iletisim formu ile bize ulasin.',
+    'Korkmaz İnşaat Gönen, Balıkesir ile iletişime geçin. Satılık daire ve konut projeleri için teklif alın. Telefon: 0537 743 55 69. Gönen\'de ev almak için bize ulaşın.',
 })
 
 const ContactPage = () => {
@@ -17,7 +17,7 @@ const ContactPage = () => {
       <BreadcrumbSchema
         items={[
           { name: 'Ana Sayfa', url: siteConfig.url },
-          { name: 'Iletisim', url: `${siteConfig.url}/iletisim` },
+          { name: 'İletişim', url: `${siteConfig.url}/iletisim` },
         ]}
       />
 

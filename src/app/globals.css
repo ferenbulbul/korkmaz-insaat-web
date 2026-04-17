@@ -8,6 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-sora);
+  --font-display: var(--font-fraunces);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
@@ -110,6 +111,155 @@
   ::selection {
     background-color: #B8962E;
     color: white;
+  }
+
+  /* ── Editorial / Luxury Utility Classes ── */
+
+  /* Animated thin gold hairline — horizontal gradient */
+  .hairline-gold {
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(184, 150, 46, 0.6),
+      transparent
+    );
+  }
+
+  .hairline-gold-sm {
+    display: inline-block;
+    height: 1px;
+    width: 60px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      #B8962E,
+      transparent
+    );
+  }
+
+  .hairline-gold-solid {
+    display: inline-block;
+    height: 1px;
+    width: 48px;
+    background: #B8962E;
+  }
+
+  /* Corner tick marks — architectural framing */
+  .tick-corner {
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    pointer-events: none;
+  }
+  .tick-corner::before,
+  .tick-corner::after {
+    content: '';
+    position: absolute;
+    background: #D4B85A;
+  }
+  .tick-corner::before {
+    width: 14px;
+    height: 1px;
+  }
+  .tick-corner::after {
+    width: 1px;
+    height: 14px;
+  }
+  .tick-corner.tl { top: 0; left: 0; }
+  .tick-corner.tl::before { top: 0; left: 0; }
+  .tick-corner.tl::after { top: 0; left: 0; }
+
+  .tick-corner.tr { top: 0; right: 0; }
+  .tick-corner.tr::before { top: 0; right: 0; }
+  .tick-corner.tr::after { top: 0; right: 0; }
+
+  .tick-corner.bl { bottom: 0; left: 0; }
+  .tick-corner.bl::before { bottom: 0; left: 0; }
+  .tick-corner.bl::after { bottom: 0; left: 0; }
+
+  .tick-corner.br { bottom: 0; right: 0; }
+  .tick-corner.br::before { bottom: 0; right: 0; }
+  .tick-corner.br::after { bottom: 0; right: 0; }
+
+  /* Index number — Fraunces, tabular, gold-300 */
+  .index-number {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-feature-settings: 'tnum' 1, 'lnum' 1;
+    font-weight: 400;
+    color: #D4B85A;
+    letter-spacing: 0.02em;
+    font-variation-settings: 'opsz' 96;
+  }
+
+  /* Overline luxury — very wide tracking */
+  .overline-lux {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-sora), ui-sans-serif, system-ui, sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.35em;
+    color: #B8962E;
+  }
+  .overline-lux::before {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #B8962E);
+  }
+  .overline-lux.flanked::after {
+    content: '';
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(90deg, #B8962E, transparent);
+  }
+
+  /* Dropcap — first letter styling */
+  .dropcap::first-letter {
+    font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+    font-size: 4.5rem;
+    font-weight: 400;
+    line-height: 0.9;
+    float: left;
+    margin-right: 0.5rem;
+    margin-top: 0.35rem;
+    color: #B8962E;
+    font-variation-settings: 'opsz' 144;
+  }
+
+  /* Draw-in vertical line animation */
+  @keyframes draw-vertical {
+    from { transform: scaleY(0); }
+    to { transform: scaleY(1); }
+  }
+  .animate-draw-vertical {
+    transform-origin: top;
+    animation: draw-vertical 1.5s ease-in-out infinite;
+  }
+
+  /* Draw-in horizontal line animation */
+  @keyframes draw-horizontal {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+  .animate-draw-horizontal {
+    transform-origin: left;
+    animation: draw-horizontal 0.9s cubic-bezier(0.22, 0.61, 0.36, 1) 0.2s both;
+  }
+
+  /* Reduced motion safety */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-draw-vertical,
+    .animate-draw-horizontal,
+    .gold-shimmer {
+      animation: none !important;
+    }
   }
 }
 

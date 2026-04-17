@@ -10,9 +10,9 @@ import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Projeler',
+  title: 'Gönen Konut Projeleri | Satılık Daireler',
   description:
-    'Korkmaz İnşaat olarak tamamladığımız konut, ticari ve karma projelerimizi inceleyin.',
+    'Gönen, Balıkesir\'de Korkmaz İnşaat konut projeleri. Satılık daireler, yeni yapı projeler ve modern yaşam alanları. Gönen\'de satılık ev arayanlar için tüm projelerimizi inceleyin.',
   alternates: { canonical: '/projeler' },
 })
 
@@ -35,7 +35,7 @@ const ProjelerPage = async () => {
       <PageHero
         title="Projelerimiz"
         overline="PORTFOYUMUZ"
-        description="25 yillik deneyimimizle hayata gecirdigimiz konut, ticari ve karma projelerimizi kesfedin."
+        description="Gönen, Balıkesir'de hayata geçirdiğimiz konut projelerimizi keşfedin. Satılık daireler ve modern yaşam alanları."
         backgroundImage="/images/hero/projeler-hero.jpg"
         breadcrumbs={[
           { label: 'Ana Sayfa', href: '/' },

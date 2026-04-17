@@ -2,7 +2,6 @@
 
 import { useEffect, useRef } from 'react'
 import { useInView, useMotionValue, useSpring, motion } from 'framer-motion'
-import { cn } from '@/lib/utils'
 
 interface StatCounterProps {
   value: number
@@ -40,13 +39,12 @@ const StatCounter = ({ value, suffix, label }: StatCounterProps) => {
     <div className="text-center">
       <motion.span
         ref={ref}
-        className={cn(
-          'block text-3xl font-extrabold text-accent md:text-5xl',
-        )}
+        className="block font-display text-4xl font-normal text-accent md:text-5xl"
+        style={{ fontVariationSettings: "'opsz' 144" }}
       >
         0{suffix ?? ''}
       </motion.span>
-      <span className="mt-2 block text-sm text-primary-foreground/80 md:text-base">
+      <span className="mt-3 block text-[11px] font-semibold uppercase tracking-[0.25em] text-primary-foreground/70 md:text-xs">
         {label}
       </span>
     </div>

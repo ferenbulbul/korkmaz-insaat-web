@@ -54,11 +54,11 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                 ? 'aspect-[16/10] md:col-span-2 md:row-span-2'
                 : 'aspect-video',
             )}
-            aria-label={image.alt || `Gorsel ${index + 1}`}
+            aria-label={image.alt || `Görsel ${index + 1}`}
           >
             <Image
               src={image.url}
-              alt={image.alt || `Gorsel ${index + 1}`}
+              alt={image.alt || `Görsel ${index + 1}`}
               fill
               className="object-cover transition-transform duration-500 group-hover:scale-105"
               sizes={
@@ -84,8 +84,8 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
         >
           <DialogTitle className="sr-only">
             {selectedIndex !== null
-              ? images[selectedIndex]?.alt || `Gorsel ${selectedIndex + 1}`
-              : 'Gorsel'}
+              ? images[selectedIndex]?.alt || `Görsel ${selectedIndex + 1}`
+              : 'Görsel'}
           </DialogTitle>
 
           {/* Image display */}
@@ -93,7 +93,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
             {selectedIndex !== null && (
               <Image
                 src={images[selectedIndex].url}
-                alt={images[selectedIndex].alt || `Gorsel ${selectedIndex + 1}`}
+                alt={images[selectedIndex].alt || `Görsel ${selectedIndex + 1}`}
                 fill
                 className="object-contain"
                 sizes="95vw"
@@ -109,7 +109,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   size="icon"
                   onClick={handlePrev}
                   className="absolute left-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-black/55 text-white hover:bg-black/75 hover:text-white"
-                  aria-label="Onceki gorsel"
+                  aria-label="Önceki görsel"
                 >
                   <ChevronLeft className="size-6" />
                 </Button>
@@ -118,7 +118,7 @@ const ImageGallery = ({ images }: ImageGalleryProps) => {
                   size="icon"
                   onClick={handleNext}
                   className="absolute right-3 top-1/2 size-11 -translate-y-1/2 rounded-full bg-black/55 text-white hover:bg-black/75 hover:text-white"
-                  aria-label="Sonraki gorsel"
+                  aria-label="Sonraki görsel"
                 >
                   <ChevronRight className="size-6" />
                 </Button>

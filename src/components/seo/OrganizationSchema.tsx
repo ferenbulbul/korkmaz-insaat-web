@@ -12,19 +12,29 @@ const OrganizationSchema = () => {
     description: siteConfig.description,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Büyükdere Cad. No:123',
-      addressLocality: 'Beşiktaş',
-      addressRegion: 'İstanbul',
-      postalCode: '34330',
+      streetAddress: 'Akçaali, 1002 Sokak No:6',
+      addressLocality: 'Gönen',
+      addressRegion: 'Balıkesir',
+      postalCode: '10900',
       addressCountry: 'TR',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: siteConfig.geo.latitude,
+      longitude: siteConfig.geo.longitude,
     },
     telephone: siteConfig.links.phone,
     email: siteConfig.links.email,
-    sameAs: [
-      siteConfig.social.instagram,
-      siteConfig.social.linkedin,
-      siteConfig.social.facebook,
-    ],
+    areaServed: {
+      '@type': 'City',
+      name: 'Gönen',
+      containedInPlace: {
+        '@type': 'AdministrativeArea',
+        name: 'Balıkesir',
+      },
+    },
+    priceRange: '₺₺₺',
+    sameAs: [siteConfig.social.instagram],
   }
 
   return <JsonLd data={data} />

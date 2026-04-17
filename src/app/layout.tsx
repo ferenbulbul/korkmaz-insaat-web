@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { sora } from '@/lib/fonts'
+import { sora, fraunces } from '@/lib/fonts'
 import { createMetadata } from '@/lib/metadata'
 import { Navbar, Footer } from '@/components/layout'
 import ConditionalFooter from '@/components/layout/ConditionalFooter'
@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="tr">
-      <body className={`${sora.variable} font-sans antialiased`}>
+      <body className={`${sora.variable} ${fraunces.variable} font-sans antialiased`}>
         <Navbar />
         <main className="min-h-screen">{children}</main>
         <ConditionalFooter>

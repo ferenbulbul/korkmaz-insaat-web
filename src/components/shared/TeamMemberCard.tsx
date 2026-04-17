@@ -15,19 +15,25 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
     .join('')
 
   return (
-    <div className="group rounded-2xl border border-border/70 bg-card p-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-accent/25 hover:shadow-xl hover:shadow-accent/10">
+    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-white/5 p-5 text-center backdrop-blur-sm transition-all duration-300 hover:border-gold-500/30 hover:bg-white/8">
+      {/* Animated top hairline */}
+      <span className="absolute inset-x-0 top-0 h-[2px] origin-left scale-x-0 bg-gradient-to-r from-accent via-gold-300 to-accent/0 transition-transform duration-700 ease-out group-hover:scale-x-100" />
+
       <div
         className={cn(
-          'mx-auto mb-4 aspect-square w-full max-w-[280px] overflow-hidden rounded-2xl',
+          'mx-auto mb-5 aspect-square w-full max-w-[280px] overflow-hidden rounded-2xl',
           'bg-gradient-to-br from-[#2C2926] via-[#3B352F] to-[#161412]',
         )}
       >
         <div className="relative flex h-full w-full items-end justify-start p-4">
-          <span className="absolute left-4 top-4 text-5xl font-black text-white/15">
+          <span
+            className="absolute right-4 top-4 font-display text-5xl font-normal text-white/10"
+            style={{ fontVariationSettings: "'opsz' 144" }}
+          >
             {initials}
           </span>
-          <div className="rounded-lg border border-white/20 bg-white/10 px-3 py-2 text-left backdrop-blur-sm">
-            <p className="text-[10px] font-semibold uppercase tracking-[0.2em] text-gold-200/90">
+          <div className="rounded-lg border border-white/15 bg-white/10 px-3 py-2 text-left backdrop-blur-sm">
+            <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-gold-200/90">
               Ekip Üyesi
             </p>
             <p className="mt-1 text-xs text-white/90">{title}</p>
@@ -35,13 +41,21 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
         </div>
       </div>
 
-      {/* Name */}
-      <h3 className="text-lg font-bold text-foreground">{name}</h3>
+      {/* Name — serif */}
+      <h3
+        className="font-display text-lg font-medium text-white"
+        style={{ fontVariationSettings: "'opsz' 48" }}
+      >
+        {name}
+      </h3>
 
       {/* Title */}
-      <p className="mt-1 text-sm text-muted-foreground">{title}</p>
+      <p className="mt-1 text-[11px] font-semibold uppercase tracking-[0.2em] text-gold-300/80">
+        {title}
+      </p>
+
       {bio && (
-        <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+        <p className="mt-3 text-sm leading-relaxed text-white/50">
           {bio}
         </p>
       )}
@@ -55,7 +69,7 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${name} LinkedIn profili`}
-              className="rounded-lg border border-border/70 p-2 text-muted-foreground transition-all hover:border-accent/25 hover:text-accent"
+              className="rounded-lg border border-white/10 p-2 text-white/40 transition-all hover:border-gold-500/30 hover:text-gold-300"
             >
               <Linkedin className="size-5" />
             </a>
@@ -64,7 +78,7 @@ const TeamMemberCard = ({ member }: TeamMemberCardProps) => {
             <a
               href={`mailto:${social.email}`}
               aria-label={`${name} e-posta`}
-              className="rounded-lg border border-border/70 p-2 text-muted-foreground transition-all hover:border-accent/25 hover:text-accent"
+              className="rounded-lg border border-white/10 p-2 text-white/40 transition-all hover:border-gold-500/30 hover:text-gold-300"
             >
               <Mail className="size-5" />
             </a>

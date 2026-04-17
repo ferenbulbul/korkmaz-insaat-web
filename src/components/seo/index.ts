@@ -1,3 +1,6 @@
 export { default as JsonLd } from './JsonLd'
 export { default as OrganizationSchema } from './OrganizationSchema'
 export { default as BreadcrumbSchema } from './BreadcrumbSchema'
+export { default as ProjectSchema } from './ProjectSchema'
+export { default as FAQSchema } from './FAQSchema'
+export { default as BlogPostSchema } from './BlogPostSchema'

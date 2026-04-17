@@ -7,13 +7,12 @@ import {
   CompanyIntro,
   VisionMission,
   Timeline,
-  TeamSection,
 } from '@/sections/about'
 
 export const metadata: Metadata = createMetadata({
-  title: 'Hakkımızda',
+  title: 'Hakkımızda | Gönen\'in Güvenilir Müteahhiti',
   description:
-    'Korkmaz İnşaat hakkında bilgi edinin. 1999\'dan beri kaliteli, güvenilir ve sürdürülebilir inşaat projeleri üretiyoruz. Vizyonumuz, misyonumuz ve uzman ekibimiz.',
+    'Korkmaz İnşaat - Gönen, Balıkesir\'de köklü inşaat firması. Kaliteli, güvenilir ve sürdürülebilir konut projeleri üretiyoruz. Gönen\'de ev yapımında uzman ekibimizi tanıyın.',
 })
 
 const AboutPage = () => {
@@ -41,7 +40,6 @@ const AboutPage = () => {
       <CompanyIntro />
       <VisionMission />
       <Timeline />
-      <TeamSection />
     </>
   )
 }

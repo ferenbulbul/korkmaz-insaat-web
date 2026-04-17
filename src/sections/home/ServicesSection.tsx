@@ -13,12 +13,13 @@ const ServicesSection = () => {
             title="Profesyonel İnşaat Çözümleri"
             description="Her projede en yüksek kalite standartlarını uygulayarak, müşterilerimize güvenilir ve sürdürülebilir inşaat hizmetleri sunuyoruz."
             alignment="center"
+            serif
           />
         </ScrollReveal>
-        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
-          {SERVICES.map((service) => (
+        <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+          {SERVICES.map((service, index) => (
             <StaggerItem key={service.id} direction="up">
-              <ServiceCard service={service} />
+              <ServiceCard service={service} index={index} />
             </StaggerItem>
           ))}
         </StaggerContainer>

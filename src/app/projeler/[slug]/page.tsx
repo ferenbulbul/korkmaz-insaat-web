@@ -1,9 +1,7 @@
 import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 import { ProjectDetail, ProjectGallery } from '@/sections/projects'
-import CTABanner from '@/components/shared/CTABanner'
-import { ScrollReveal } from '@/components/motion'
-import BreadcrumbSchema from '@/components/seo/BreadcrumbSchema'
+import { BreadcrumbSchema, ProjectSchema } from '@/components/seo'
 import { getProjectBySlug } from '@/services/projects'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
@@ -25,15 +23,21 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
     })
   }
 
+  const seoTitle = `${project.title} | Gönen Satılık Daire`
+  const seoDescription = `${project.description} Gönen, Balıkesir'de ${project.title} projesi. Korkmaz İnşaat güvencesiyle.`
+
   return createMetadata({
-    title: project.title,
-    description: project.description,
+    title: seoTitle,
+    description: seoDescription,
     alternates: { canonical: `/projeler/${project.slug}` },
     openGraph: {
       type: 'article',
-      title: project.title,
-      description: project.description,
+      title: seoTitle,
+      description: seoDescription,
       url: `${siteConfig.url}/projeler/${project.slug}`,
+      images: project.thumbnailUrl
+        ? [{ url: project.thumbnailUrl, width: 1200, height: 630, alt: project.title }]
+        : undefined,
     },
   })
 }
@@ -55,21 +59,13 @@ const ProjectDetailPage = async ({ params }: PageProps) => {
           { name: project.title, url: `${siteConfig.url}/projeler/${project.slug}` },
         ]}
       />
+      <ProjectSchema project={project} />
 
       <ProjectDetail project={project} />
 
       {project.images.length > 0 && (
         <ProjectGallery images={project.images} />
       )}
-
-      <ScrollReveal direction="up">
-        <CTABanner
-          title="Benzer bir proje mi düşünüyorsunuz?"
-          description="Deneyimli ekibimizle projenizi hayata geçirelim. Ücretsiz keşif ve fiyat teklifi için hemen iletişime geçin."
-          buttonText="Bize Ulaşın"
-          href="/iletisim"
-        />
-      </ScrollReveal>
     </>
   )
 }

@@ -58,7 +58,7 @@ const Navbar = () => {
           <Logo variant={isHomeTop ? 'light' : 'dark'} size="md" />
 
           {/* Desktop navigation */}
-          <nav className="hidden items-center gap-1 md:flex">
+          <nav className="hidden items-center gap-0.5 md:flex">
             {NAV_ITEMS.map((item) => {
               const isActive =
                 item.href === '/'
@@ -77,18 +77,18 @@ const Navbar = () => {
                   <Link
                     href={item.href}
                     className={cn(
-                      'relative flex items-center gap-1 px-4 py-2 text-sm font-medium transition-colors',
+                      'relative flex items-center gap-1 px-4 py-2 text-[13px] font-medium tracking-wide transition-colors',
                       isHomeTop
-                        ? 'text-white/75 hover:text-white'
+                        ? 'text-white/70 hover:text-white'
                         : 'text-foreground/50 hover:text-foreground',
-                      'after:absolute after:bottom-0 after:left-1/2 after:h-0.5 after:w-0 after:-translate-x-1/2 after:bg-accent after:transition-all after:duration-300 hover:after:w-2/3',
+                      'after:absolute after:bottom-0 after:left-1/2 after:h-[2px] after:w-0 after:-translate-x-1/2 after:bg-accent after:transition-all after:duration-300 hover:after:w-2/3',
                       isActive && (isHomeTop ? 'text-white after:w-2/3' : 'text-foreground after:w-2/3')
                     )}
                   >
                     {item.label}
                     {hasChildren && (
                       <ChevronDown className={cn(
-                        'size-3.5 transition-transform duration-200',
+                        'size-3 transition-transform duration-200',
                         isOpen && 'rotate-180'
                       )} />
                     )}
@@ -112,7 +112,7 @@ const Navbar = () => {
                                   key={child.href}
                                   href={child.href}
                                   onClick={() => setOpenDropdown(null)}
-                                  className="flex items-center px-4 py-2.5 text-sm text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
+                                  className="flex items-center px-4 py-2.5 text-[13px] text-foreground/70 transition-colors hover:bg-secondary hover:text-foreground"
                                 >
                                   {child.label}
                                 </Link>
@@ -133,14 +133,14 @@ const Navbar = () => {
             <Button
               asChild
               className={cn(
-                'hidden text-sm font-semibold text-white md:inline-flex',
+                'hidden h-10 rounded-lg px-6 text-[13px] font-semibold uppercase tracking-[0.1em] text-white md:inline-flex',
                 isHomeTop
-                  ? 'border border-white/25 bg-white/10 backdrop-blur hover:bg-white/15'
+                  ? 'border border-white/20 bg-white/10 backdrop-blur hover:bg-white/15'
                   : 'bg-accent hover:bg-accent/90',
               )}
               size="default"
             >
-              <Link href="/iletisim">Bize Ulasin</Link>
+              <Link href="/iletisim">Bize Ulaşın</Link>
             </Button>
 
             <Button
@@ -153,7 +153,7 @@ const Navbar = () => {
                   : 'text-foreground hover:bg-secondary',
               )}
               onClick={() => setMobileOpen(true)}
-              aria-label="Menuyu ac"
+              aria-label="Menüyü aç"
             >
               <Menu className="size-6" />
             </Button>
