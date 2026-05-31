@@ -16,7 +16,7 @@ const ServicesSection = () => {
             serif
           />
         </ScrollReveal>
-        <StaggerContainer staggerDelay={0.12} className="grid grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-4">
+        <StaggerContainer staggerDelay={0.12} className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {SERVICES.map((service, index) => (
             <StaggerItem key={service.id} direction="up">
               <ServiceCard service={service} index={index} />
