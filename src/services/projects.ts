@@ -74,6 +74,24 @@ export const getProjectBySlug = async (
 export const getFeaturedProjects = async (limit = 6): Promise<Project[]> =>
   getProjects({ featured: true, limit })
 
+export const getHeroProjects = async (limit = 6): Promise<Project[]> => {
+  const supabase = await createSupabaseServerClient()
+
+  const { data, error } = await supabase
+    .from('projects')
+    .select('*, project_images(*)')
+    .eq('show_in_hero', true)
+    .order('order_index', { ascending: true })
+    .limit(limit)
+
+  if (error) {
+    console.error('[getHeroProjects] Supabase error:', error.message)
+    return []
+  }
+
+  return (data as ProjectRow[]).map(mapProjectRow)
+}
+
 // Uses admin client so it can run outside a request (build-time generateStaticParams).
 export const getAllProjectSlugs = async (): Promise<string[]> => {
   const supabase = createSupabaseAdminClient()
@@ -124,6 +142,7 @@ export interface ProjectInput {
   start_date?: string | null
   apartment_types?: string[] | null
   featured?: boolean
+  show_in_hero?: boolean
   specs?: unknown[]
   features?: unknown[]
   thumbnail_url?: string | null

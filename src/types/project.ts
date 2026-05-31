@@ -126,6 +126,7 @@ export interface Project {
   startDate?: string | null
   apartmentTypes?: string[] | null
   featured: boolean
+  showInHero: boolean
   specs: ProjectSpec[]
   features: ProjectFeature[]
   thumbnailUrl?: string | null
@@ -184,6 +185,7 @@ export interface ProjectRow {
   start_date: string | null
   apartment_types: string[] | null
   featured: boolean
+  show_in_hero: boolean
   specs: ProjectSpec[] | null
   features: ProjectFeature[] | Record<string, unknown> | null
   thumbnail_url: string | null
@@ -232,6 +234,7 @@ export const mapProjectRow = (row: ProjectRow): Project => ({
   startDate: row.start_date,
   apartmentTypes: row.apartment_types,
   featured: row.featured,
+  showInHero: row.show_in_hero,
   specs: row.specs ?? [],
   features: normalizeFeatures(row.features),
   thumbnailUrl: row.thumbnail_url,

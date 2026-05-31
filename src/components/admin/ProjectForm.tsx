@@ -44,6 +44,7 @@ interface FormState {
   startDate: string
   apartmentTypes: string[]
   featured: boolean
+  showInHero: boolean
   specs: ProjectSpec[]
   features: ProjectFeature[]
   orderIndex: string
@@ -65,6 +66,7 @@ const initialState = (project?: Project): FormState => ({
   startDate: project?.startDate ?? '',
   apartmentTypes: project?.apartmentTypes ?? [],
   featured: project?.featured ?? false,
+  showInHero: project?.showInHero ?? false,
   specs: project?.specs ?? [],
   features: project?.features ?? [],
   orderIndex: project?.orderIndex !== undefined ? String(project.orderIndex) : '0',
@@ -209,6 +211,7 @@ const ProjectForm = ({ mode, project }: ProjectFormProps) => {
       start_date: state.startDate.trim() || null,
       apartment_types: state.apartmentTypes.length > 0 ? state.apartmentTypes : null,
       featured: state.featured,
+      show_in_hero: state.showInHero,
       specs: cleanSpecs,
       features: cleanFeatures,
       order_index: Number(state.orderIndex) || 0,
@@ -624,6 +627,23 @@ const ProjectForm = ({ mode, project }: ProjectFormProps) => {
             </span>
             <span className="block text-xs text-muted-foreground">
               Isaretli projeler ana sayfadaki &quot;One Cikan Projeler&quot; alaninda gosterilir
+            </span>
+          </span>
+        </label>
+
+        <label className="flex cursor-pointer items-center gap-3">
+          <input
+            type="checkbox"
+            checked={state.showInHero}
+            onChange={(e) => setField('showInHero', e.target.checked)}
+            className="size-5 rounded border-border text-accent focus:ring-accent"
+          />
+          <span>
+            <span className="block text-sm font-semibold text-foreground">
+              Hero alaninda goster
+            </span>
+            <span className="block text-xs text-muted-foreground">
+              Isaretli projelerin resmi ana sayfa hero karuselinde gosterilir
             </span>
           </span>
         </label>

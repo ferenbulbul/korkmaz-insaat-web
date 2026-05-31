@@ -1,4 +1,4 @@
-import { getFeaturedProjects } from '@/services/projects'
+import { getHeroProjects } from '@/services/projects'
 import HeroCarousel from './HeroCarousel'
 
 const FALLBACK_IMAGES = [
@@ -16,9 +16,9 @@ export interface HeroSlide {
 }
 
 const HeroSection = async () => {
-  const projects = await getFeaturedProjects(6)
+  const projects = await getHeroProjects(6)
 
-  // Build slides from featured projects that have images
+  // Build slides from hero-marked projects that have images
   const projectSlides: HeroSlide[] = []
   for (const p of projects) {
     const imageUrl = p.thumbnailUrl || p.images[0]?.url
