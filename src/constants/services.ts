@@ -11,13 +11,7 @@ export const SERVICES: Service[] = [
     id: '2',
     icon: 'Landmark',
     title: 'Ticari Yapı',
-    description: 'İş merkezleri, AVM ve ofis binaları için anahtar teslim ticari yapı çözümleri sunuyoruz.',
-  },
-  {
-    id: '3',
-    icon: 'HardHat',
-    title: 'Altyapı',
-    description: 'Yol, köprü ve kanalizasyon projeleriyle şehirlerin altyapısını güçlendiriyoruz.',
+    description: 'İş merkezleri ve ofis binaları için anahtar teslim ticari yapı çözümleri sunuyoruz.',
   },
   {
     id: '4',
