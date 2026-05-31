@@ -58,8 +58,8 @@ const ContactCTA = () => {
           <ScrollReveal direction="right" delay={0.2} duration={0.7}>
             <div className="grid grid-cols-2 gap-8">
               {[
-                { value: '25+', label: 'Yıllık Deneyim' },
-                { value: '150+', label: 'Tamamlanan Proje' },
+                { value: '13+', label: 'Yıllık Deneyim' },
+                { value: '40+', label: 'Tamamlanan Proje' },
                 { value: '80+', label: 'Uzman Kadro' },
                 { value: 'A', label: 'Kalite Sınıfı' },
               ].map((stat) => (

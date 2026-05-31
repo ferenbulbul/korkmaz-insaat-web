@@ -6,8 +6,8 @@ import { ScrollReveal } from '@/components/motion'
 import { COMPANY_INFO } from '@/constants/company'
 
 const highlights = [
-  { icon: CheckCircle, value: '150+', label: 'Tamamlanan Proje' },
-  { icon: Calendar, value: '25+', label: 'Yillik Deneyim' },
+  { icon: CheckCircle, value: '40+', label: 'Tamamlanan Proje' },
+  { icon: Calendar, value: '13+', label: 'Yillik Deneyim' },
   { icon: Users, value: '80+', label: 'Uzman Kadro' },
   { icon: Award, value: 'A Sinifi', label: 'Kalite Standardi' },
 ]
@@ -42,7 +42,7 @@ const AboutPreview = () => {
             <div>
               <SectionTitle
                 overline="HAKKIMIZDA"
-                title="25 Yıllık Deneyim ve Güven"
+                title="Güven, Kalite ve Sürdürülebilirlik"
                 alignment="left"
                 serif
                 className="mb-6 md:mb-8"

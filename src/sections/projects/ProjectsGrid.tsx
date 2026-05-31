@@ -1,6 +1,5 @@
 import ProjectCard from '@/components/shared/ProjectCard'
 import { ScrollReveal, StaggerContainer, StaggerItem } from '@/components/motion'
-import { cn } from '@/lib/utils'
 import type { Project } from '@/types/project'
 
 interface ProjectsGridProps {
@@ -29,11 +28,6 @@ const ProjectsGrid = ({ projects }: ProjectsGridProps) => {
         <StaggerItem
           key={project.id}
           direction="up"
-          className={cn(
-            // Editorial staggered offset: every 3rd card (middle column) drops down on lg+
-            'lg:first:mt-0',
-            index % 3 === 1 && 'lg:mt-16',
-          )}
         >
           <ProjectCard project={project} index={index} />
         </StaggerItem>

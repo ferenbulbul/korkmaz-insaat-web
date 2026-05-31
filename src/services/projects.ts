@@ -119,12 +119,10 @@ export interface ProjectInput {
   area: number
   floor_count: number
   unit_count?: number | null
-  parking_floor_count?: number | null
+  has_parking?: boolean
   completion_date?: string | null
   start_date?: string | null
   apartment_types?: string[] | null
-  client?: string | null
-  architect?: string | null
   featured?: boolean
   specs?: unknown[]
   features?: unknown[]

@@ -86,9 +86,7 @@ const ProjectDetail = ({ project }: ProjectDetailProps) => {
     ...(project.unitCount
       ? [{ label: 'Daire Sayısı', value: String(project.unitCount) }]
       : []),
-    ...(project.parkingFloorCount
-      ? [{ label: 'Otopark Kat Sayısı', value: String(project.parkingFloorCount) }]
-      : []),
+    { label: 'Otopark', value: project.hasParking ? 'Var' : 'Yok' },
   ]
 
   const infoRight = [

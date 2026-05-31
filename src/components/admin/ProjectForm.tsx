@@ -39,12 +39,10 @@ interface FormState {
   area: string
   floorCount: string
   unitCount: string
-  parkingFloorCount: string
+  hasParking: boolean
   completionDate: string
   startDate: string
   apartmentTypes: string[]
-  client: string
-  architect: string
   featured: boolean
   specs: ProjectSpec[]
   features: ProjectFeature[]
@@ -62,12 +60,10 @@ const initialState = (project?: Project): FormState => ({
   area: project?.area ? String(project.area) : '',
   floorCount: project?.floorCount ? String(project.floorCount) : '',
   unitCount: project?.unitCount ? String(project.unitCount) : '',
-  parkingFloorCount: project?.parkingFloorCount ? String(project.parkingFloorCount) : '',
+  hasParking: project?.hasParking ?? false,
   completionDate: project?.completionDate ?? '',
   startDate: project?.startDate ?? '',
   apartmentTypes: project?.apartmentTypes ?? [],
-  client: project?.client ?? '',
-  architect: project?.architect ?? '',
   featured: project?.featured ?? false,
   specs: project?.specs ?? [],
   features: project?.features ?? [],
@@ -208,12 +204,10 @@ const ProjectForm = ({ mode, project }: ProjectFormProps) => {
       area: areaNum,
       floor_count: floorNum,
       unit_count: state.unitCount ? Number(state.unitCount) : null,
-      parking_floor_count: state.parkingFloorCount ? Number(state.parkingFloorCount) : null,
+      has_parking: state.hasParking,
       completion_date: state.completionDate.trim() || null,
       start_date: state.startDate.trim() || null,
       apartment_types: state.apartmentTypes.length > 0 ? state.apartmentTypes : null,
-      client: state.client.trim() || null,
-      architect: state.architect.trim() || null,
       featured: state.featured,
       specs: cleanSpecs,
       features: cleanFeatures,
@@ -401,15 +395,16 @@ const ProjectForm = ({ mode, project }: ProjectFormProps) => {
               className={inputCls}
             />
           </Field>
-          <Field label="Otopark Kat Sayisi">
-            <input
-              type="number"
-              value={state.parkingFloorCount}
-              onChange={(e) => setField('parkingFloorCount', e.target.value)}
-              min={0}
-              placeholder="2"
-              className={inputCls}
-            />
+          <Field label="Otopark">
+            <label className="mt-1 flex cursor-pointer items-center gap-2">
+              <input
+                type="checkbox"
+                checked={state.hasParking}
+                onChange={(e) => setField('hasParking', e.target.checked)}
+                className="size-4 rounded border-border text-accent focus:ring-accent"
+              />
+              <span className="text-sm text-foreground">Otopark mevcut</span>
+            </label>
           </Field>
         </Row>
 
@@ -432,30 +427,12 @@ const ProjectForm = ({ mode, project }: ProjectFormProps) => {
               className={inputCls}
             />
           </Field>
-          <Field label="Isveren">
-            <input
-              type="text"
-              value={state.client}
-              onChange={(e) => setField('client', e.target.value)}
-              placeholder="Korkmaz Yapi A.S."
-              className={inputCls}
-            />
-          </Field>
-          <Field label="Mimari">
-            <input
-              type="text"
-              value={state.architect}
-              onChange={(e) => setField('architect', e.target.value)}
-              placeholder="Tabanlioglu Mimarlik"
-              className={inputCls}
-            />
-          </Field>
         </Row>
       </Card>
 
       {/* ── Apartment types (only for konut) ── */}
-      {state.category === 'konut' && (
-        <Card title="Daire Tipleri" subtitle="Sadece konut projeleri icin (2+1, 3+1 vb.)">
+      {(state.category === 'konut' || state.category === 'karma') && (
+        <Card title="Daire Tipleri" subtitle="Konut ve karma projeler icin (2+1, 3+1 vb.)">
           <div className="flex flex-wrap items-center gap-2">
             {state.apartmentTypes.map((t) => (
               <span

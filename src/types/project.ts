@@ -121,12 +121,10 @@ export interface Project {
   area: number
   floorCount: number
   unitCount?: number | null
-  parkingFloorCount?: number | null
+  hasParking: boolean
   completionDate?: string | null
   startDate?: string | null
   apartmentTypes?: string[] | null
-  client?: string | null
-  architect?: string | null
   featured: boolean
   specs: ProjectSpec[]
   features: ProjectFeature[]
@@ -181,12 +179,10 @@ export interface ProjectRow {
   area: number
   floor_count: number
   unit_count: number | null
-  parking_floor_count: number | null
+  has_parking: boolean
   completion_date: string | null
   start_date: string | null
   apartment_types: string[] | null
-  client: string | null
-  architect: string | null
   featured: boolean
   specs: ProjectSpec[] | null
   features: ProjectFeature[] | Record<string, unknown> | null
@@ -231,12 +227,10 @@ export const mapProjectRow = (row: ProjectRow): Project => ({
   area: row.area,
   floorCount: row.floor_count,
   unitCount: row.unit_count,
-  parkingFloorCount: row.parking_floor_count,
+  hasParking: row.has_parking,
   completionDate: row.completion_date,
   startDate: row.start_date,
   apartmentTypes: row.apartment_types,
-  client: row.client,
-  architect: row.architect,
   featured: row.featured,
   specs: row.specs ?? [],
   features: normalizeFeatures(row.features),

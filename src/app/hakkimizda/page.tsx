@@ -28,7 +28,7 @@ const AboutPage = () => {
       <PageHero
         title="Hakkımızda"
         overline="KORKMAZ İNŞAAT"
-        description="1999'dan bu yana güvenle inşa ediyoruz. Kalite, güvenilirlik ve müşteri memnuniyeti odaklı yaklaşımımızla sektörde fark yaratıyoruz."
+        description="2012'den bu yana Balıkesir Gönen'de güvenle inşa ediyoruz. Kalite, güvenilirlik ve müşteri memnuniyeti odaklı yaklaşımımızla sektörde fark yaratıyoruz."
         backgroundImage="https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=2000&auto=format&fit=crop"
         breadcrumbs={[
           { label: 'Ana Sayfa', href: '/' },

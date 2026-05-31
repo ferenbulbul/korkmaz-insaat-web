@@ -113,7 +113,7 @@ const ProjectCard = ({ project, index }: ProjectCardProps) => {
               {area.toLocaleString('tr-TR')} m&sup2;
             </span>
 
-            {category === 'konut' && apartmentTypes && apartmentTypes.length > 0 && (
+            {(category === 'konut' || category === 'karma') && apartmentTypes && apartmentTypes.length > 0 && (
               <>
                 {apartmentTypes.slice(0, 3).map((type) => (
                   <span
