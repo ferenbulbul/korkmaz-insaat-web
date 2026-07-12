@@ -99,7 +99,7 @@ const Footer = ({ showBlog = true }: FooterProps) => {
             <ul className="mt-5 space-y-4">
               <li>
                 <a
-                  href={`https://maps.google.com/?q=${encodeURIComponent(siteConfig.links.address)}`}
+                  href={siteConfig.links.mapsUrl}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-start gap-3 text-sm text-stone-400 transition-colors duration-200 hover:text-gold-300"

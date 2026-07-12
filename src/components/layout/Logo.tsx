@@ -18,7 +18,7 @@ const Logo = ({ variant = 'dark', size = 'md', className }: LogoProps) => {
   return (
     <Link href="/" className={cn('inline-flex items-center', className)}>
       <Image
-        src={variant === 'light' ? '/logo-light.png' : '/logo.png'}
+        src={variant === 'light' ? '/logo-light-2.png' : '/logo-2.png'}
         alt="Korkmaz İnşaat"
         width={1249}
         height={1431}

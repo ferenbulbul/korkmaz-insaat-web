@@ -25,6 +25,7 @@ const OrganizationSchema = () => {
     },
     telephone: siteConfig.links.phone,
     email: siteConfig.links.email,
+    hasMap: siteConfig.links.mapsUrl,
     areaServed: {
       '@type': 'City',
       name: 'Gönen',

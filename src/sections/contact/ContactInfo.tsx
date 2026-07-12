@@ -15,6 +15,7 @@ const infoCards: InfoCard[] = [
     icon: MapPin,
     title: 'Adresimiz',
     content: siteConfig.links.address,
+    href: siteConfig.links.mapsUrl,
   },
   {
     icon: Phone,
@@ -77,6 +78,10 @@ const ContactInfo = () => {
                     {...(card.href
                       ? {
                           href: card.href,
+                          ...(card.href.startsWith('http') && {
+                            target: '_blank',
+                            rel: 'noopener noreferrer',
+                          }),
                           className:
                             'text-sm leading-relaxed text-foreground transition-colors hover:text-accent',
                         }
