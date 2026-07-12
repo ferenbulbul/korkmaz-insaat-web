@@ -2,19 +2,22 @@ import Link from 'next/link'
 import { Plus, Star, Edit, MapPin, Ruler, ImageOff, FileText } from 'lucide-react'
 import { getAllProjectsForAdmin } from '@/services/projects'
 import { getAllBlogPostsForAdmin } from '@/services/blog'
+import { getBlogVisible } from '@/services/settings'
 import {
   PROJECT_CATEGORIES,
   PROJECT_STATUS_LABELS,
 } from '@/types/project'
 import AdminHeader from '@/components/admin/AdminHeader'
 import DeleteProjectButton from '@/components/admin/DeleteProjectButton'
+import BlogVisibilityToggle from '@/components/admin/BlogVisibilityToggle'
 
 export const revalidate = 0
 
 const AdminDashboardPage = async () => {
-  const [projects, blogPosts] = await Promise.all([
+  const [projects, blogPosts, blogVisible] = await Promise.all([
     getAllProjectsForAdmin(),
     getAllBlogPostsForAdmin(),
+    getBlogVisible(),
   ])
 
   return (
@@ -34,13 +37,16 @@ const AdminDashboardPage = async () => {
                 <p className="text-xs text-muted-foreground">{blogPosts.length} yazi ({blogPosts.filter(p => p.status === 'published').length} yayinda)</p>
               </div>
             </div>
-            <Link
-              href="/admin/yazilar"
-              className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-secondary"
-            >
-              <FileText className="size-4" />
-              Yazilari Yonet
-            </Link>
+            <div className="flex items-center gap-5">
+              <BlogVisibilityToggle initialVisible={blogVisible} />
+              <Link
+                href="/admin/yazilar"
+                className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-4 py-2 text-sm font-semibold text-foreground transition hover:bg-secondary"
+              >
+                <FileText className="size-4" />
+                Yazilari Yonet
+              </Link>
+            </div>
           </div>
         </div>
 

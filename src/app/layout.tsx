@@ -4,22 +4,25 @@ import { createMetadata } from '@/lib/metadata'
 import { Navbar, Footer } from '@/components/layout'
 import ConditionalFooter from '@/components/layout/ConditionalFooter'
 import { Toaster } from '@/components/ui/sonner'
+import { getBlogVisible } from '@/services/settings'
 import './globals.css'
 
 export const metadata: Metadata = createMetadata()
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const blogVisible = await getBlogVisible()
+
   return (
     <html lang="tr">
       <body className={`${sora.variable} ${fraunces.variable} font-sans antialiased`}>
-        <Navbar />
+        <Navbar showBlog={blogVisible} />
         <main className="min-h-screen">{children}</main>
         <ConditionalFooter>
-          <Footer />
+          <Footer showBlog={blogVisible} />
         </ConditionalFooter>
         <Toaster position="top-right" />
       </body>

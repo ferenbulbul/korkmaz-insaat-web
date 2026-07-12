@@ -7,6 +7,7 @@ import { ArrowRight } from 'lucide-react'
 import useEmblaCarousel from 'embla-carousel-react'
 import Autoplay from 'embla-carousel-autoplay'
 import Fade from 'embla-carousel-fade'
+import { AnimatePresence, motion } from 'framer-motion'
 import { cn } from '@/lib/utils'
 import { Container } from '@/components/layout'
 import { ScrollReveal } from '@/components/motion'
@@ -49,7 +50,7 @@ const HeroCarousel = ({ slides }: HeroCarouselProps) => {
   const activeSlide = slides[selectedIndex]
 
   return (
-    <section className="noise-overlay relative -mt-20 flex min-h-screen items-center overflow-hidden">
+    <section className="noise-overlay relative -mt-24 flex min-h-screen items-center overflow-hidden">
       {/* Background carousel */}
       <div ref={emblaRef} className="absolute inset-0 overflow-hidden">
         <div className="flex h-full">
@@ -111,41 +112,78 @@ const HeroCarousel = ({ slides }: HeroCarouselProps) => {
             <div className="gold-shimmer h-[2px] w-20 rounded-full" />
           </ScrollReveal>
 
-          {/* Overline luxe */}
-          <ScrollReveal direction="down" delay={0.25} distance={25}>
-            <div className="flex items-center gap-4">
-              <span className="hairline-gold-solid" />
-              <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-gold-300/90">
-                2012&apos;den beri güvenin adresi
-              </p>
-            </div>
-          </ScrollReveal>
+          {activeSlide?.title ? (
+            /* Project mode — title + description change with the active slide */
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={selectedIndex}
+                initial={{ opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5, ease: 'easeOut' }}
+                className="flex flex-col gap-6 lg:gap-8"
+              >
+                {/* Overline — project status */}
+                <div className="flex items-center gap-4">
+                  <span className="hairline-gold-solid" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-gold-300/90">
+                    {activeSlide.statusLabel}
+                  </p>
+                </div>
 
-          {/* Main title — "Insa" serif italic emphasis */}
-          <ScrollReveal direction="up" delay={0.45} distance={40}>
-            <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
-              Güvenle{' '}
-              <span className="relative inline-block">
-                <span
-                  className="bg-gradient-to-r from-gold-200 via-gold-400 to-gold-300 bg-clip-text font-display font-normal italic text-transparent"
-                  style={{ fontVariationSettings: "'opsz' 144" }}
-                >
-                  İnşa
-                </span>
-                <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-gold-500 to-transparent" />
-              </span>{' '}
-              Ediyoruz
-            </h1>
-          </ScrollReveal>
+                {/* Project title */}
+                <h1 className="line-clamp-2 text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl">
+                  {activeSlide.title}
+                </h1>
 
-          {/* Subtitle */}
-          <ScrollReveal direction="up" delay={0.65} distance={30}>
-            <p className="max-w-xl text-base leading-relaxed text-white/55 md:text-lg">
-              15 yılı aşkın deneyimimizle, modern mühendislik çözümleri ve
-              üstün kalite standartlarıyla hayalinizdeki yapıları
-              sağlam temeller üzerine inşa ediyoruz.
-            </p>
-          </ScrollReveal>
+                {/* Project description */}
+                {activeSlide.description && (
+                  <p className="line-clamp-3 max-w-xl text-base leading-relaxed text-white/55 md:text-lg">
+                    {activeSlide.description}
+                  </p>
+                )}
+              </motion.div>
+            </AnimatePresence>
+          ) : (
+            /* Fallback mode — static brand copy */
+            <>
+              {/* Overline luxe */}
+              <ScrollReveal direction="down" delay={0.25} distance={25}>
+                <div className="flex items-center gap-4">
+                  <span className="hairline-gold-solid" />
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.4em] text-gold-300/90">
+                    2012&apos;den beri güvenin adresi
+                  </p>
+                </div>
+              </ScrollReveal>
+
+              {/* Main title — "Insa" serif italic emphasis */}
+              <ScrollReveal direction="up" delay={0.45} distance={40}>
+                <h1 className="text-4xl font-extrabold leading-[1.05] tracking-tight text-white sm:text-5xl md:text-6xl lg:text-7xl">
+                  Güvenle{' '}
+                  <span className="relative inline-block">
+                    <span
+                      className="bg-gradient-to-r from-gold-200 via-gold-400 to-gold-300 bg-clip-text font-display font-normal italic text-transparent"
+                      style={{ fontVariationSettings: "'opsz' 144" }}
+                    >
+                      İnşa
+                    </span>
+                    <span className="absolute -bottom-1 left-0 h-[2px] w-full bg-gradient-to-r from-gold-500 to-transparent" />
+                  </span>{' '}
+                  Ediyoruz
+                </h1>
+              </ScrollReveal>
+
+              {/* Subtitle */}
+              <ScrollReveal direction="up" delay={0.65} distance={30}>
+                <p className="max-w-xl text-base leading-relaxed text-white/55 md:text-lg">
+                  15 yılı aşkın deneyimimizle, modern mühendislik çözümleri ve
+                  üstün kalite standartlarıyla hayalinizdeki yapıları
+                  sağlam temeller üzerine inşa ediyoruz.
+                </p>
+              </ScrollReveal>
+            </>
+          )}
 
           {/* CTA Buttons */}
           <ScrollReveal direction="up" delay={0.85} distance={20}>

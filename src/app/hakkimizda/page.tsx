@@ -6,7 +6,6 @@ import { siteConfig } from '@/config/site'
 import {
   CompanyIntro,
   VisionMission,
-  Timeline,
 } from '@/sections/about'
 
 export const metadata: Metadata = createMetadata({
@@ -39,7 +38,6 @@ const AboutPage = () => {
       {/* Page Sections */}
       <CompanyIntro />
       <VisionMission />
-      <Timeline />
     </>
   )
 }

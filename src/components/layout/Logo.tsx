@@ -9,23 +9,16 @@ interface LogoProps {
 }
 
 const heightMap = {
-  sm: 'h-9',
-  md: 'h-12',
-  lg: 'h-14',
+  sm: 'h-14',
+  md: 'h-[84px]',
+  lg: 'h-[104px]',
 } as const
 
 const Logo = ({ variant = 'dark', size = 'md', className }: LogoProps) => {
   return (
-    <Link
-      href="/"
-      className={cn(
-        'inline-flex items-center',
-        variant === 'light' && 'bg-white/95 px-2 py-1',
-        className
-      )}
-    >
+    <Link href="/" className={cn('inline-flex items-center', className)}>
       <Image
-        src="/logo.png"
+        src={variant === 'light' ? '/logo-light.png' : '/logo.png'}
         alt="Korkmaz İnşaat"
         width={1249}
         height={1431}

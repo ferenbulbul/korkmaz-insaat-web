@@ -60,8 +60,6 @@ const ContactCTA = () => {
               {[
                 { value: '13+', label: 'Yıllık Deneyim' },
                 { value: '40+', label: 'Tamamlanan Proje' },
-                { value: '80+', label: 'Uzman Kadro' },
-                { value: 'A', label: 'Kalite Sınıfı' },
               ].map((stat) => (
                 <div key={stat.label} className="text-center lg:text-left">
                   <span

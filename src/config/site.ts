@@ -8,11 +8,11 @@ export const siteConfig = {
   links: {
     phone: '+90 537 743 55 69',
     email: 'info@korkmazinsaat.com.tr',
-    address: 'Korkmaz Plaza, Akçaali, 1002 Sokak No:6, 10900 Gönen/Balıkesir',
+    address: 'Korkmaz Plaza, Akçaali Mahallesi, 1002 Sokak No:6B, 10900 Gönen/Balıkesir',
   },
   geo: {
-    latitude: 40.1097,
-    longitude: 27.6478,
+    latitude: 40.1055704,
+    longitude: 27.6528501,
     region: 'TR-10',
     placename: 'Gönen, Balıkesir',
   },

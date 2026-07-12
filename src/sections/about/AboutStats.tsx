@@ -9,7 +9,7 @@ const AboutStats = () => {
   return (
     <SectionWrapper bgColor="dark" id="about-stats">
       <Container>
-        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-2 gap-8 md:gap-12 lg:grid-cols-4">
+        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-2 gap-8 md:gap-12 lg:grid-cols-3">
           {COMPANY_STATS.map((stat) => (
             <StaggerItem key={stat.label} direction="up">
               <StatCounter

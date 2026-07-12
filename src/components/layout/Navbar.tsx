@@ -11,7 +11,11 @@ import { Button } from '@/components/ui/button'
 import Logo from './Logo'
 import NavbarMobile from './NavbarMobile'
 
-const Navbar = () => {
+interface NavbarProps {
+  showBlog?: boolean
+}
+
+const Navbar = ({ showBlog = true }: NavbarProps) => {
   const [mobileOpen, setMobileOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [openDropdown, setOpenDropdown] = useState<string | null>(null)
@@ -23,11 +27,6 @@ const Navbar = () => {
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
-  // Hide the site navbar on admin routes
-  if (pathname.startsWith('/admin')) return null
-
-  const isHomeTop = pathname === '/' && !scrolled
 
   const handleMouseEnter = useCallback((href: string) => {
     if (closeTimeout.current) {
@@ -43,11 +42,20 @@ const Navbar = () => {
     }, 150)
   }, [])
 
+  // Hide the site navbar on admin routes
+  if (pathname.startsWith('/admin')) return null
+
+  const isHomeTop = pathname === '/' && !scrolled
+
+  const navItems = showBlog
+    ? NAV_ITEMS
+    : NAV_ITEMS.filter((item) => item.href !== '/blog')
+
   return (
     <>
       <header
         className={cn(
-          'fixed top-0 left-0 right-0 z-50 h-20 transition-all duration-300',
+          'fixed top-0 left-0 right-0 z-50 h-24 transition-all duration-300',
           isHomeTop
             ? 'bg-transparent'
             : 'border-b border-border/40 bg-white/95 backdrop-blur-xl shadow-sm shadow-black/[0.03]',
@@ -59,7 +67,7 @@ const Navbar = () => {
 
           {/* Desktop navigation */}
           <nav className="hidden items-center gap-0.5 md:flex">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const isActive =
                 item.href === '/'
                   ? pathname === '/'
@@ -162,10 +170,10 @@ const Navbar = () => {
       </header>
 
       {/* Mobile drawer */}
-      <NavbarMobile open={mobileOpen} onOpenChange={setMobileOpen} />
+      <NavbarMobile open={mobileOpen} onOpenChange={setMobileOpen} showBlog={showBlog} />
 
       {/* Spacer to prevent content from hiding behind fixed navbar */}
-      <div className="h-20" />
+      <div className="h-24" />
     </>
   )
 }

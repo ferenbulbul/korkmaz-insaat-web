@@ -17,7 +17,7 @@ const StatsSection = () => {
       <span className="tick-corner br pointer-events-none hidden lg:block" style={{ bottom: '2rem', right: '2rem' }} />
 
       <Container className="relative z-10">
-        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-2 gap-8 md:gap-12 lg:grid-cols-4">
+        <StaggerContainer staggerDelay={0.15} className="grid grid-cols-2 gap-8 md:gap-12 lg:grid-cols-3">
           {COMPANY_STATS.map((stat, i) => (
             <StaggerItem key={stat.label} direction="up">
               <div className="relative">

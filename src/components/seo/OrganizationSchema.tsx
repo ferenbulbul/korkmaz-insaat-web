@@ -12,7 +12,7 @@ const OrganizationSchema = () => {
     description: siteConfig.description,
     address: {
       '@type': 'PostalAddress',
-      streetAddress: 'Akçaali, 1002 Sokak No:6',
+      streetAddress: 'Korkmaz Plaza, Akçaali Mahallesi, 1002 Sokak No:6B',
       addressLocality: 'Gönen',
       addressRegion: 'Balıkesir',
       postalCode: '10900',

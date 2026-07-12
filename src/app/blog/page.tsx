@@ -1,10 +1,12 @@
 import type { Metadata } from 'next'
+import { notFound } from 'next/navigation'
 import Container from '@/components/layout/Container'
 import SectionWrapper from '@/components/layout/SectionWrapper'
 import { PageHero } from '@/components/shared'
 import { BreadcrumbSchema } from '@/components/seo'
 import BlogList from '@/sections/blog/BlogList'
 import { getBlogPosts } from '@/services/blog'
+import { getBlogVisible } from '@/services/settings'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
@@ -19,6 +21,9 @@ export const dynamic = 'force-dynamic'
 export const revalidate = 0
 
 const BlogPage = async () => {
+  const blogVisible = await getBlogVisible()
+  if (!blogVisible) notFound()
+
   const posts = await getBlogPosts()
 
   return (

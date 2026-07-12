@@ -19,8 +19,19 @@ const socialLinks = [
   },
 ] as const
 
-const Footer = () => {
+interface FooterProps {
+  showBlog?: boolean
+}
+
+const Footer = ({ showBlog = true }: FooterProps) => {
   const currentYear = new Date().getFullYear()
+
+  const footerSections = showBlog
+    ? FOOTER_SECTIONS
+    : FOOTER_SECTIONS.map((section) => ({
+        ...section,
+        links: section.links.filter((link) => link.href !== '/blog'),
+      }))
 
   return (
     <footer className="noise-overlay relative bg-[#1C1917] text-stone-300">
@@ -58,7 +69,7 @@ const Footer = () => {
           </div>
 
           {/* Column 2-3: Footer sections from constant */}
-          {FOOTER_SECTIONS.map((section) => (
+          {footerSections.map((section) => (
             <div key={section.title}>
               <h3 className="text-[11px] font-semibold uppercase tracking-[0.25em] text-white">
                 {section.title}

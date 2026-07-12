@@ -21,11 +21,16 @@ import Logo from './Logo'
 interface NavbarMobileProps {
   open: boolean
   onOpenChange: (open: boolean) => void
+  showBlog?: boolean
 }
 
-const NavbarMobile = ({ open, onOpenChange }: NavbarMobileProps) => {
+const NavbarMobile = ({ open, onOpenChange, showBlog = true }: NavbarMobileProps) => {
   const pathname = usePathname()
   const [expandedItem, setExpandedItem] = useState<string | null>(null)
+
+  const navItems = showBlog
+    ? NAV_ITEMS
+    : NAV_ITEMS.filter((item) => item.href !== '/blog')
 
   const handleLinkClick = () => {
     onOpenChange(false)
@@ -50,7 +55,7 @@ const NavbarMobile = ({ open, onOpenChange }: NavbarMobileProps) => {
         {/* Navigation links */}
         <nav className="flex-1 px-4 py-6">
           <ul className="space-y-1">
-            {NAV_ITEMS.map((item) => {
+            {navItems.map((item) => {
               const isActive =
                 item.href === '/'
                   ? pathname === '/'

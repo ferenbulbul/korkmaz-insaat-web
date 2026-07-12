@@ -3,6 +3,7 @@ import type { Metadata } from 'next'
 import { BreadcrumbSchema, BlogPostSchema } from '@/components/seo'
 import BlogContent from '@/sections/blog/BlogContent'
 import { getBlogPostBySlug } from '@/services/blog'
+import { getBlogVisible } from '@/services/settings'
 import { createMetadata } from '@/lib/metadata'
 import { siteConfig } from '@/config/site'
 
@@ -43,6 +44,9 @@ export const generateMetadata = async ({ params }: PageProps): Promise<Metadata>
 }
 
 const BlogDetailPage = async ({ params }: PageProps) => {
+  const blogVisible = await getBlogVisible()
+  if (!blogVisible) notFound()
+
   const { slug } = await params
   const post = await getBlogPostBySlug(slug)
 

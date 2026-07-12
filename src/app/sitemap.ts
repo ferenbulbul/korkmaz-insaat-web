@@ -1,11 +1,14 @@
 import type { MetadataRoute } from 'next'
 import { getProjectsForSitemap } from '@/services/projects'
 import { getBlogPostsForSitemap } from '@/services/blog'
+import { getBlogVisibleForStatic } from '@/services/settings'
 import { siteConfig } from '@/config/site'
 
 export const dynamic = 'force-dynamic'
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  const blogVisible = await getBlogVisibleForStatic()
+
   const staticPages: MetadataRoute.Sitemap = [
     {
       url: siteConfig.url,
@@ -31,13 +34,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: 'monthly',
       priority: 0.6,
     },
-    {
+  ]
+
+  if (blogVisible) {
+    staticPages.push({
       url: `${siteConfig.url}/blog`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.8,
-    },
-  ]
+    })
+  }
 
   // Fetch projects defensively — if Supabase env vars are missing during build
   // (e.g. preview deploys without secrets), fall back to static pages only.
@@ -54,18 +60,20 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn('[sitemap] Could not fetch projects:', err)
   }
 
-  // Fetch blog posts
+  // Fetch blog posts (skipped entirely when the blog is hidden)
   let blogPages: MetadataRoute.Sitemap = []
-  try {
-    const blogPosts = await getBlogPostsForSitemap()
-    blogPages = blogPosts.map((post) => ({
-      url: `${siteConfig.url}/blog/${post.slug}`,
-      lastModified: new Date(post.updatedAt),
-      changeFrequency: 'weekly' as const,
-      priority: 0.7,
-    }))
-  } catch (err) {
-    console.warn('[sitemap] Could not fetch blog posts:', err)
+  if (blogVisible) {
+    try {
+      const blogPosts = await getBlogPostsForSitemap()
+      blogPages = blogPosts.map((post) => ({
+        url: `${siteConfig.url}/blog/${post.slug}`,
+        lastModified: new Date(post.updatedAt),
+        changeFrequency: 'weekly' as const,
+        priority: 0.7,
+      }))
+    } catch (err) {
+      console.warn('[sitemap] Could not fetch blog posts:', err)
+    }
   }
 
   return [...staticPages, ...projectPages, ...blogPages]

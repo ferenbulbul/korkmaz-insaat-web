@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowRight, CheckCircle, Calendar, Users, Award } from 'lucide-react'
+import { ArrowRight, CheckCircle, Calendar } from 'lucide-react'
 import { Container, SectionWrapper } from '@/components/layout'
 import { SectionTitle } from '@/components/shared'
 import { ScrollReveal } from '@/components/motion'
@@ -8,8 +8,6 @@ import { COMPANY_INFO } from '@/constants/company'
 const highlights = [
   { icon: CheckCircle, value: '40+', label: 'Tamamlanan Proje' },
   { icon: Calendar, value: '13+', label: 'Yillik Deneyim' },
-  { icon: Users, value: '80+', label: 'Uzman Kadro' },
-  { icon: Award, value: 'A Sinifi', label: 'Kalite Standardi' },
 ]
 
 const AboutPreview = () => {
