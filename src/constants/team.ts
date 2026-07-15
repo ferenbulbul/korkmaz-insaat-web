@@ -7,7 +7,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     title: 'Yönetim Kurulu Başkanı',
     photoUrl: '/images/team/ahmet-korkmaz.jpg',
     bio: '30 yıllık inşaat sektörü deneyimi. Firma kurucu ortağı.',
-    social: { linkedin: '#', email: 'ahmet@korkmazinsaat.com.tr' },
+    social: { linkedin: '#', email: 'korkmazinsaatgonen1@gmail.com' },
   },
   {
     id: '2',
@@ -15,7 +15,7 @@ export const TEAM_MEMBERS: TeamMember[] = [
     title: 'Genel Müdür',
     photoUrl: '/images/team/elif-demir.jpg',
     bio: 'İTÜ İnşaat Mühendisliği mezunu. 15 yıllık proje yönetimi deneyimi.',
-    social: { linkedin: '#', email: 'elif@korkmazinsaat.com.tr' },
+    social: { linkedin: '#', email: 'korkmazinsaatgonen1@gmail.com' },
   },
   {
     id: '3',

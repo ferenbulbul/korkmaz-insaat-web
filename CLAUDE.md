@@ -62,6 +62,7 @@ Public site (projects, blog, contact) + admin panel, backed by Supabase.
 - `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`
 - `ADMIN_PASSWORD`, `ADMIN_SESSION_SECRET`
 - `NEXT_PUBLIC_APP_URL`
+- `RESEND_API_KEY`, `CONTACT_TO_EMAIL`, `CONTACT_FROM_EMAIL` (optional, defaults to onboarding@resend.dev) — contact form email via Resend REST API (no SDK)
 
 ## SEO
 - `createMetadata()` helper in `src/lib/metadata.ts` for per-page metadata
